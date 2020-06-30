@@ -19,9 +19,12 @@ const trainerController = {
             .where('trainer.id_trainer', '=', id)
             .select('pokemon_trainer.id_pokemon');
         
-        console.log(idPokemon);
-        
-        return res.json({ idPokemon })    
+        const infoPokemon = await connection('pokemon')
+            .select('*')
+            .whereIn('pokemon.id_pokemon', idPokemon)
+            .distinct();
+
+        return res.json(infoPokemon)    
     },
 };
 

@@ -1,32 +1,33 @@
 import { Request, Response } from 'express';
 import connection from '../database/connection';
-import Knex from 'knex';
 
 const addPokemonToTrainer = {
     async create(req: Request, res: Response) { 
         const { id } = req.params;
         const { idsPokemon } = req.body;
 
+        console.log(idsPokemon);
+
         const trx = await connection.transaction();
 
-        const id_trainer = id;
+        const id_trainer = Number(id);
 
         const insertPokemonAndTrainer = idsPokemon
-            .split(',')
-            .map((id_pokemon: string) => Number(id_pokemon.trim()))
+            .map((idPokemon: string) => Number(idPokemon.trim()))
             .map((id_pokemon: number) => {
                 return {
                     id_pokemon,
                     id_trainer
                 }
             });
+        console.log(insertPokemonAndTrainer);
 
         await trx('pokemon_trainer')
             .insert(insertPokemonAndTrainer);
 
         await trx.commit();
         
-        return res.json({ message: 'Everything right' });
+        return res.json({ id: id_trainer });
     },
 
     async show(req: Request, res: Response) {
