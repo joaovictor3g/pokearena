@@ -18,13 +18,15 @@ const trainerController = {
             .join('pokemon_trainer', 'pokemon_trainer.id_trainer', '=', 'trainer.id_trainer')
             .where('trainer.id_trainer', '=', id)
             .select('pokemon_trainer.id_pokemon');
-        
+
+        const result = idPokemon.map(id => id.id_pokemon);
+
         const infoPokemon = await connection('pokemon')
             .select('*')
-            .whereIn('pokemon.id_pokemon', idPokemon)
+            .whereIn('pokemon.id_pokemon', result)
             .distinct();
 
-        return res.json(infoPokemon)    
+        return res.json(infoPokemon);   
     },
 };
 
