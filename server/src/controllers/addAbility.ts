@@ -3,16 +3,13 @@ import connection from '../database/connection';
 import api from '../services/api';
 import axios from 'axios';
 
-function getUrls(url: string) {
-    return axios.get(url).then(res => res.data.effect_entries[1].effect);
-}
+async function getUrls(url: string) {
+    const response = await axios.get(url);
 
-function getUrlsAgain(url: string) {
-    fetch(url).then(result => console.log(result))
-};
+    const effect = response.data.effect_entries[1].effect;
+    const id = response.data.id;
 
-function getNumber(url: string) {
-    const result = url.split("").filter((n: number) => (Number(n) || n == 0)).join("");
+    return { effect, id };
 }
 
 const addAbility = {
@@ -26,18 +23,29 @@ const addAbility = {
         const names = abilities
             .map((ability: { ability: { name: string } }) => (ability.ability.name));
 
-        const urls = abilities
+        const urls: string[] = abilities
             .map((ability: { ability: { url: string } }) => (ability.ability.url)); 
-        
-        const idsAbilities = urls.split("").filter((n: number) => (Number(n) || n == 0)).join("");
 
-        console.log(idsAbilities)
+        urls.map(async(url: string, idx: number) => {
+            const response = await getUrls(url);
+            
+            const effect = response.effect;
+            const id_ability = response.id;
 
-        const urlResponse = await getUrls(urls[1])    
-        //const urlResponse = urls.map(async(url: string, idx: number) => await axios.get(url).then(res => res.data));
-        console.log(urlResponse);
-        //const fcs = await urls.map((url: string) => getUrls(url));
-        //console.log(fcs);
+            try {
+                const data = { id_ability, name: names[idx], effect };
+
+                await connection('ability').insert(data);
+
+                if(idx+1===urls.length)
+                    return res.json({ message: 'Ability added' })
+
+            } catch (err) {
+                console.log(err);
+            }
+        });
+    
+       
     },  
 };
 
