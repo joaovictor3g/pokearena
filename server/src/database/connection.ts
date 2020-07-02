@@ -1,12 +1,15 @@
 import knex from 'knex';
-import path from 'path';
 
 const connection = knex({
-    client: 'sqlite3',
+    client: 'pg',
+    version: '12.2',
     connection: {
-        filename: path.resolve(__dirname, 'pokearena.sqlite') 
+        host : '127.0.0.1',
+        user : 'postgres',
+        password : '1234',
+        database : 'Pokemon'    
     },
-    useNullAsDefault: true,
+    useNullAsDefault: true
 });
 
 export default connection;

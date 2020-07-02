@@ -19,7 +19,7 @@ routes.get('/see-your-pokemons/:id', trainerController.show);
 routes.post('/catch/:id', addPokemonToTrainer.create);
 routes.get('/see-pokemons-caught/:id', addPokemonToTrainer.show);
 
-routes.get('/see-infos/:id_trainer', addAbility.create);
-
+routes.get('/see-infos/:id_pokemon', addAbility.create);
+routes.get('/see-pokemon-infos/:id_pokemon', addAbility.index);
 
 export default routes;

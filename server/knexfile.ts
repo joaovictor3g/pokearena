@@ -1,9 +1,13 @@
 import path from 'path';
 
 module.exports = {
-    client: 'sqlite3',
+    client: 'pg',
+    version: '12.2',
     connection: {
-        filename: path.resolve(__dirname, 'src', 'database', 'pokearena.sqlite'),
+        host : '127.0.0.1',
+        user : 'postgres',
+        password : '1234',
+        database : 'Pokemon'    
     },
 
     migrations: {
