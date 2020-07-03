@@ -3,12 +3,23 @@ import connection from '../database/connection';
 
 const trainerController = {
     async create(req: Request, res: Response) {
-        const { name } = req.body;
+        const { name, password } = req.body;
         
         await connection('trainer')
-            .insert({ name });
+            .insert({ name, password });
         
         return res.json({ message: 'Trainer reached ten years' });
+    },
+
+    async signIn(req: Request, res: Response) {
+        const { name, password } = req.body;
+
+        const [id] = await connection('trainer')
+            .select('id_trainer')
+            .where('name', name)
+            .where('password', password);
+        
+        return res.json(id);
     },
 
     async show(req: Request, res: Response) {

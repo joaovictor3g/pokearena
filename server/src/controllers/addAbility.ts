@@ -31,6 +31,16 @@ const addAbility = {
         // Criação de uma transaction afim de evitar que se uma inserção dê errado ele não insira no proximo.
         const trx = await connection.transaction();
 
+        const validate = await trx('ability').select('id_ability');
+
+        const validatePokemon = await trx('pokemon_abilities').select('id_pokemon');
+
+        const result = validate.map((validate: { id_ability: number }) => (validate.id_ability));
+
+        const resultPokemon = validatePokemon.map((validate: { id_pokemon: any }) => (validate.id_pokemon));
+
+        let cont = 0;
+
         urls.map(async(url: string, idx: number) => {
             const response = await axios.get(url);
             
@@ -38,22 +48,26 @@ const addAbility = {
 
             const id_ability = response.data.id;
 
-            const validate = await trx('ability').select('id_ability');
+            cont++;
 
-            const result = validate.map((validate: { id_ability: number }) => (validate.id_ability));
+            try { 
+                if(!result.includes(id_ability)) {
+                    await trx('ability').insert({ id_ability, name: names[idx], effect });
+                    //await trx.commit();
+                }
 
-            const validatePokemon = await trx('pokemon').select('id_pokemon');
+                if(result[idx]===id_ability && resultPokemon[idx]===id_pokemon) {
+                    await trx('pokemon_abilities')
+                        .insert({ id_pokemon, id_ability });
 
-            const resultPokemon = validatePokemon.map((validate: { id_pokemon: any }) => (validate.id_pokemon));
+                }
 
-            if(!result.includes(id_ability))
-                await trx('ability').insert({ id_ability, name: names[idx], effect });
-
-            if(!resultPokemon.includes(id_pokemon))
-                await trx('pokemon_abilities')
-                    .insert({ id_pokemon: Number(id_pokemon), id_ability: Number(id_ability) });
+                await trx.commit();
                 
-            await trx.commit();
+            } catch(err) {
+                console.log('Deu erro');
+                //await trx.rollback();
+            }
 
         });
 
