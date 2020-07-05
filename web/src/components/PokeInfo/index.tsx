@@ -1,18 +1,21 @@
-import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import React, { useState, useEffect, Dispatch, SetStateAction, MouseEvent } from 'react';
 import { MdCancel } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './styles.css';
 
 interface Props {
     pokedexNumber: number,
     name: string,
-    setDescription: Dispatch<SetStateAction<string>>
+    setDescription: Dispatch<SetStateAction<string>>,
+    onClose: () => void
 }
 
-const PokeInfo: React.FC<Props> = ({ pokedexNumber, name, setDescription }) => {
+const PokeInfo: React.FC<Props> = ({ pokedexNumber, name, setDescription, onClose }) => {
     const [infos, setInfos] = useState<[]>([]);
     const [types, setTypes] = useState<[]>([]);
+
+    const history = useHistory();
 
     const [uniqueDescription, setUniqueDescription] = useState<string>('');
 
@@ -48,7 +51,7 @@ const PokeInfo: React.FC<Props> = ({ pokedexNumber, name, setDescription }) => {
         <div className="container-modal">
             <div className="name-and-cancel-container">
                 <h1>{name}</h1>
-                <button> 
+                <button onClick={onClose}> 
                     <MdCancel color="#000" size={30}/>
                 </button> 
             </div>

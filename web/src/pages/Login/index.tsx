@@ -14,10 +14,6 @@ const Login = () => {
     const [changeEye, setChangeEye] = useState<boolean>(false);
     const history = useHistory();
 
-    useEffect(() => {
-        api.post('/login', { name: 'João Victor D.', password: '1234444' }).then(res => console.log(res.data.id_trainer))
-    }, []);
-
     async function login() {
         const data = { name, password };
 
@@ -29,6 +25,8 @@ const Login = () => {
             return;
         
         const id = response.data.id_trainer;
+
+        sessionStorage.setItem('id_trainer', id);
         
         history.push(`/catch/${id}`);
     }

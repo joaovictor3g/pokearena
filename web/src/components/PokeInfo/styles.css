@@ -16,6 +16,8 @@
     border: 1px solid #000;
 
     background: #FFF;
+
+    margin: auto;
 }
 
 .container-modal .name-and-cancel-container {

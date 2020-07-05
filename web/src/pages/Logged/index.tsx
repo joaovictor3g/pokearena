@@ -104,6 +104,7 @@ const Logged = () => {
                               pokedexNumber={pokedexNumber}
                               name={pokemonName}
                               setDescription={setDescription}
+                              onClose={()=>setPokeInfoVisible(false)}
                             /> : null}
                         </td>
                       </tr>
@@ -113,12 +114,6 @@ const Logged = () => {
                 </table>
                 <button onClick={goToPreviousPage} className="next">Anterior</button>
                 <button onClick={nextPage} className="previous" >Proximo</button>
-
-                {/*<div className="choose-initial-container">
-                    {pokemons.map((pokemon: { name: string }, idx: number) => (
-                      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${idx+1+pages}.png`} alt="pokeball" />
-                    ))}
-                </div>*/}
             </div>
         </>
     );
