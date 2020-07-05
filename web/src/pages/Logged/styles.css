@@ -1,0 +1,183 @@
+.header {
+    background: #333333;
+    width: 100%;
+    color: #FFF;
+    text-align: center;
+
+    font-size: 30px;
+    font-weight: bold;
+    font-family: Ubuntu;
+
+    padding: 30px;
+    z-index: 10;
+
+}
+
+.container-all {
+    margin: 10px;
+    text-align: center;
+    z-index: 10;
+}
+
+.container-all .choose-initial-container {
+    width: 700px;
+    height: 500px;
+    display: flex;
+    justify-content: space-between;
+
+    border: 1px solid #000;
+    background: #9fff80;
+    border-radius: 8px;
+    
+    margin: 0 auto;
+    padding: 30px;
+}
+
+.container-all .choose-initial-container img {
+    width: 100px;
+    height: 100px;
+
+    position: relative;
+}
+
+.table-container {
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #666666; 
+    border-collapse: collapse;
+    justify-content: center;
+}
+
+.table-container tbody .initial-tr {
+    background: #333333;
+    color: #FFF;
+    font-weight: bold;
+    height: 70px;
+    font-family: Ubuntu;
+}
+
+.table-container tbody tr td {
+    font-size: 18px;
+    font-family: Ubuntu;
+}
+
+.table-container tbody tr .td-name {
+    font-weight: bold;
+}
+
+.table-container tbody tr .image-td {
+    width: 200px;
+}
+
+.table-container tbody tr .image-td img {
+    width: 90px;
+    height: 90px;
+}
+
+.table-container tbody tr .id-td {
+    width: 200px;
+}
+
+.table-container tbody tr .actions-table {
+    width: 600px;
+}
+
+tr:nth-child(even) {
+    background: #adebad
+}
+tr:nth-child(odd) {
+    background: #70db70;
+}
+
+.actions-column .btn-1 {
+    background: crimson;
+    padding: 10px;
+    width: 150px;
+    height: 50px;
+
+    font-size: 18px;
+
+    border: 0;
+    border-radius: 5px;
+}
+
+.actions-column .btn-1 .link {
+    text-decoration: none;
+
+    font-weight: bold;
+    color: #FFF;
+    
+}
+
+.actions-column .btn-2 {
+    background: darkblue;
+    border: 0;
+    padding: 10px;
+    width: 100px;
+    width: 150px;
+    height: 50px;
+
+    font-size: 18px;
+
+    border-radius: 5px;
+    margin-left: 10px;
+    color: #FFF;
+    font-weight: bold;
+}
+
+.next {
+    width: 200px;
+    height: 50px;
+
+    font-weight: bold;
+    font-size: 18px;
+
+    color: #FFF;
+    background: #000;
+
+    border-radius: 5px;
+    border: 0;
+
+    margin-top: 2px;
+    margin-right: 2px;
+}
+
+.next:hover {
+    color: #000;
+    background: #FFF;
+
+    border: 1px solid #000;
+}
+
+.previous {
+    width: 200px;
+    height: 50px;
+
+    font-weight: bold;
+    font-size: 18px;
+
+    color: #FFF;
+    background: #000;
+
+    border-radius: 5px;
+    border: 0;
+
+    margin-top: 2px;
+}
+
+.previous:hover {
+    color: #000;
+    background: #FFF;
+
+    border: 1px solid #000;
+}
+
+.link-to-see-pokemons {
+    display: flex;
+    text-align: right;
+
+    text-decoration: none;
+    font-size: 18px;
+}

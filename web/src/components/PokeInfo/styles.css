@@ -1,0 +1,26 @@
+.container {
+    width: 800px;
+    height: 500px;
+    position: absolute;
+    top: 200px;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: normal;
+    margin-top: 100px;
+
+    content: '';
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background: rgba(#000, .5);
+    z-index: 2;
+
+    border: 1px solid #000;
+
+    background: red;
+}
+
+.container img {
+    text-align: left;
+}

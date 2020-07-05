@@ -64,11 +64,11 @@ const Login = () => {
                     </button>
                 </div>
                 <Link to="/sign-up" className="sign-up">
-                    Cadastrar novo usuário
+                    Não tem cadastro? Cadastrar novo usuário
                     <FiArrowRight />
                 </Link>
 
-                <button type="submit" className="button" onClick={()=>login()}>
+                <button type="button" className="button" onClick={login}>
                     Login
                 </button>
                 
