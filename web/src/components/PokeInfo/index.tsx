@@ -9,7 +9,7 @@ interface Props {
 
 const PokeInfo: React.FC<Props> = ({ pokedexNumber, name }) => {
   return (
-      <div className="container">
+      <div className="container-modal">
           <MdCancel color="#000"/>
           <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokedexNumber}.png`} alt="pokemon"/>
       </div>
