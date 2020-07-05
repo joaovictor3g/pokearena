@@ -46,11 +46,14 @@ const NewTrainer: React.FC = () => {
 
     return (
         <>  
-            <button onClick={(e) => {
-                e.preventDefault();
-                history.push('/');
-                
-            }} className="link-to-home">
+            <button 
+                onClick={(e) => {
+                    e.preventDefault();
+                    history.push('/');
+
+                }} 
+                className="link-to-home"
+            >
                 <FiPower size={32} />
             </button>
             <div className="sign-up-to">

@@ -1,14 +1,11 @@
 .container-modal {
+    text-align: center;
     width: 800px;
     height: 500px;
-    position: absolute;
-    top: 200px;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-weight: normal;
     margin-top: 100px;
+    display: block;
+    padding: 20px;
 
     content: '';
     position: fixed;
@@ -18,9 +15,152 @@
 
     border: 1px solid #000;
 
-    background: red;
+    background: #FFF;
 }
 
-.container img {
-    text-align: left;
+.container-modal .name-and-cancel-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-modal .name-and-cancel-container button {
+    background: transparent;
+    border: 0;
+}
+
+.container-modal .description-image-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-modal .description-image-container img {
+    width: 200px;
+    height: 200px;
+    background: transparent;
+}
+
+.container-modal .description-image-container span {
+    background: teal;
+    padding: 30px;  
+    color: #FFF;
+    font-weight: bold;
+    
+    width: 500px;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+.container-modal img {
+    background: #FFF;
+    width: 200px;
+    height: 200px;
+}
+
+.container-modal svg {
+    position: relative;
+    top: 0;
+    left: 8px;
+    width: 30px;
+}
+
+.container-modal p {
+    height: 30px;
+    margin-bottom: 5px;
+    width: 200px;
+    color: #FFF;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 4px;
+
+    border-radius: 3px;
+}
+
+.container-modal p.fire {
+    background: #ff8000;
+    
+}
+
+.container-modal p.poison {
+    background: #730099;
+    
+}
+
+.container-modal p.grass {
+    background: #00e600;
+    
+}
+
+.container-modal p.psychic {
+    background: #d24dff;
+    
+}
+
+.container-modal p.ice {
+    background: #80e5ff;
+    
+}
+
+.container-modal p.flying {
+    background: #1affff;
+    
+}
+
+.container-modal p.normal {
+    background:#a3a375;
+    
+}
+
+.container-modal p.water {
+    background:#0099ff;
+    
+}
+
+
+.container-modal p.dark {
+    background:#003366;
+    
+}
+
+.container-modal p.rock {
+    background: #b37700;
+    
+}
+
+.container-modal p.bug {
+    background: #333300;
+    
+}
+
+.container-modal p.electric {
+    background: #ffff33;
+    
+}
+
+.container-modal p.fairy {
+    background: #ff4d88;
+}
+
+.container-modal p.fighting {
+    background: #ff3300;
+    
+}
+
+.container-modal p.dragon {
+    background: #008fb3;
+    
+}
+
+.container-modal p.ghost {
+    background: #000080;
+    
+}
+
+.container-modal p.ground {
+    background: #4d2600;
+    
+}
+
+.container-modal p.steel {
+    background: #33ff99;
+    
 }

@@ -13,6 +13,8 @@ const Logged = () => {
 
     const [isPokeInfoVisbile, setPokeInfoVisible] = useState<boolean>(false);
     const [pokedexNumber, setPokedexNumber] = useState<number>(1);
+    const [description, setDescription] = useState<string>('');
+    const [pokemonName, setPokemonName] = useState<string>('');
 
     useEffect(() => {
         getResponsePokemon();
@@ -53,9 +55,10 @@ const Logged = () => {
       getResponsePokemon(pages - 5)
     }
 
-    function handlePokeInfoVisible(idx: number) {
+    function handlePokeInfoVisible(idx: number, name: string) {
       setPokeInfoVisible(true);
       setPokedexNumber(idx);
+      setPokemonName(name)
     }
 
     return (
@@ -92,14 +95,15 @@ const Logged = () => {
                                 Informations
                             </Link>
                           </button>
-                          <button onClick={() => handlePokeInfoVisible(index+1+pages)} className="btn-2">
+                          <button onClick={() => handlePokeInfoVisible(index+1+pages, pokemon.name)} className="btn-2">
                                 Catch
                           </button>
 
                           {isPokeInfoVisbile ? 
                             <PokeInfo 
                               pokedexNumber={pokedexNumber}
-                              name={pokemon.name}
+                              name={pokemonName}
+                              setDescription={setDescription}
                             /> : null}
                         </td>
                       </tr>
