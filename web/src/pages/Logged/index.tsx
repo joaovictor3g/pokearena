@@ -66,7 +66,7 @@ const Logged = () => {
             <header className="header">Capture seus pokemons</header>
             
             <div className="container-all">
-                <Link to={`/see-your-pokemons/`} className="link-to-see-pokemons">
+                <Link to={`/see-your-pokemons/${sessionStorage.getItem('id_trainer')}`} className="link-to-see-pokemons">
                     Capturou algum? Veja seus pokemos já capturados.
                 </Link>
                 <table className="table-container">

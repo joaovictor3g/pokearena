@@ -1,0 +1,48 @@
+.go-home-button {
+    margin: 10px;
+}
+
+.your-pokemons-content {
+    margin: 10px auto;
+    padding: 10px;
+    display: flex;
+
+    width: 100%;
+
+}
+
+.your-pokemons-content .content-pokemons {
+    border-radius: 8px;
+    padding: 20px;
+
+    margin-left: 10px;
+
+    background: #FFF;
+}
+
+.your-pokemons-content .content-pokemons button {
+    background: transparent;
+    border: 0;
+}
+
+.your-pokemons-content .content-pokemons .id {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.your-pokemons-content .content-pokemons img {
+    width: 200px;
+    height: 200px;
+}
+
+.your-pokemons-content .content-pokemons .name {
+    font-weight: bold;
+    font-size: 24px;
+
+    font-family: Ubuntu;
+}
+
+.trash-and-id {
+    display: flex;
+    justify-content: space-between;
+}
