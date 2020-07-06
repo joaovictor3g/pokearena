@@ -38,7 +38,9 @@
 .container-modal .description-image-container img {
     width: 200px;
     height: 200px;
-    background: transparent;
+    background: #DDD;
+
+    border-radius: 5px;
 }
 
 .container-modal .description-image-container span {
@@ -165,4 +167,17 @@
 .container-modal p.steel {
     background: #33ff99;
     
+}
+
+.confim-catching {
+    background: crimson;
+    border: 0;
+
+    height: 50px;
+    width: 200px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFF;
+
+    border-radius: 5px;
 }

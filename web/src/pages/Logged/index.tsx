@@ -90,13 +90,9 @@ const Logged = () => {
                         </td>
                     
                         <td className="actions-column">
-                          <button className="btn-1">
-                            <Link to={`/pokedex/poke-info/${index + 1 + pages}`} className="link">
-                                Informations
-                            </Link>
-                          </button>
+                          
                           <button onClick={() => handlePokeInfoVisible(index+1+pages, pokemon.name)} className="btn-2">
-                                Catch
+                                Capturar
                           </button>
 
                           {isPokeInfoVisbile ? 

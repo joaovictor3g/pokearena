@@ -14,21 +14,29 @@ const Login = () => {
     const [changeEye, setChangeEye] = useState<boolean>(false);
     const history = useHistory();
 
-    async function login() {
+    async function login(e: MouseEvent<HTMLButtonElement>) {
+        e.preventDefault();
+
         const data = { name, password };
 
-        console.log(data);
+        try {
+            const response = await api.post('/login', data);
+        
+            if(!response.data) {
+                alert('Usuário e/ou senha incorretos');
+                return;
 
-        const response = await api.post('/login', data);
-        
-        if(!response)
-            return;
-        
-        const id = response.data.id_trainer;
+            }
+            
+            const id = response.data.id_trainer;
 
-        sessionStorage.setItem('id_trainer', id);
-        
-        history.push(`/catch/${id}`);
+            sessionStorage.setItem('id_trainer', id);
+            
+            history.push(`/catch/${id}`);
+        } catch (err) {
+
+        }
+
     }
 
     function handleClickVisibleButton(e: MouseEvent<HTMLButtonElement>) {

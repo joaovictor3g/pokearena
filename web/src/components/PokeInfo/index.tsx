@@ -1,8 +1,9 @@
 import React, { useState, useEffect, Dispatch, SetStateAction, MouseEvent } from 'react';
 import { MdCancel } from 'react-icons/md';
-import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import './styles.css';
+import { type } from 'os';
+import api from '../../services/api';
 
 interface Props {
     pokedexNumber: number,
@@ -14,15 +15,18 @@ interface Props {
 const PokeInfo: React.FC<Props> = ({ pokedexNumber, name, setDescription, onClose }) => {
     const [infos, setInfos] = useState<[]>([]);
     const [types, setTypes] = useState<[]>([]);
-
-    const history = useHistory();
+    const [numberType, setNumberType] = useState<[]>([]);
+    const [urlType, setUrlType] = useState<string[]>([]);
 
     const [uniqueDescription, setUniqueDescription] = useState<string>('');
 
     useEffect(() => {
         axios.get(`https://pokeapi.co/api/v2/pokemon/${pokedexNumber}`)
-            .then(res => setTypes(res.data.types));
-    }, [pokedexNumber]);
+            .then(res => {
+                setTypes(res.data.types);
+                setUrlType(types.map((type: { type: { url: string } }) => type.type.url))
+            });
+    }, [pokedexNumber, types, urlType]);
 
     async function getDetail () {
         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${pokedexNumber}`)
@@ -45,7 +49,47 @@ const PokeInfo: React.FC<Props> = ({ pokedexNumber, name, setDescription, onClos
     useEffect(() => {
         getDetail();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [pokedexNumber])
+    }, [pokedexNumber]);
+
+    async function persistInfos(e: MouseEvent<HTMLButtonElement>) {
+        e.preventDefault();
+
+        const data = { idsPokemon: pokedexNumber };
+
+        const id = sessionStorage.getItem('id_trainer');
+
+        const pokeData = { 
+            id_pokemon: pokedexNumber, 
+            name, description: uniqueDescription, 
+            image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokedexNumber}.png` 
+        };
+
+        try { 
+            await api.post(`/catch-pokemons`, pokeData);
+
+            const typeAdded = await api.post(`catch/${id}`, data);
+
+            if(!typeAdded) {
+                alert('Não Capturado');
+                return;
+            }
+
+        alert('Capturado');
+        } catch(err) {
+
+        }
+
+        
+    }
+
+    /*useEffect(() => {
+        // eslint-disable-next-line array-callback-return
+        urlType.map((url: string) => {
+            axios.get(url).then(res => {
+                setNumberType(res.data.id);
+            })
+        })
+    }, [numberType, urlType]);*/
 
     return (
         <div className="container-modal">
@@ -64,6 +108,7 @@ const PokeInfo: React.FC<Props> = ({ pokedexNumber, name, setDescription, onClos
             {types.map((type: { type: { name: string } }, idx: number) => (
                 <p className={type.type.name} key={idx}>{type.type.name}</p>
             ))}
+            <button onClick={persistInfos} className="confim-catching">Confirmar Captura?</button>
         </div>
     );
 }

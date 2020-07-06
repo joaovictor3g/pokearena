@@ -16,3 +16,7 @@ input {
 button {
     cursor: pointer;
 }
+
+button:hover {
+    opacity: 0.5;
+}
