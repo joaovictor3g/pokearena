@@ -6,11 +6,12 @@ const addPokemonToTrainer = {
         const { id } = req.params;
         const { idsPokemon } = req.body;
 
-        const trx = await connection.transaction();
+        //const trx = await connection.transaction();
 
         const id_trainer = Number(id);
+        const id_pokemon = Number(idsPokemon);
 
-        const insertPokemonAndTrainer = idsPokemon
+        /*const insertPokemonAndTrainer = idsPokemon
             .split(',')
             .map((idPokemon: string) => Number(idPokemon.trim()))
             .map((id_pokemon: number) => {
@@ -18,12 +19,10 @@ const addPokemonToTrainer = {
                     id_pokemon,
                     id_trainer
                 }
-            });
+            });*/
 
-        await trx('pokemon_trainer')
-            .insert(insertPokemonAndTrainer);
-
-        await trx.commit();
+        await connection('pokemon_trainer')
+            .insert({ id_trainer, id_pokemon });
         
         return res.json({ id: id_trainer });
     },
