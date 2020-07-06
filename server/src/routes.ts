@@ -16,6 +16,7 @@ routes.post('/catch-pokemons', pokemonController.create);
 routes.post('/', trainerController.create);
 routes.get('/see-your-pokemons/:id', trainerController.show);
 routes.post('/login', trainerController.signIn);
+routes.delete('/delete/:id_trainer', trainerController.deletePokemon);
 
 // Add Pokemon to trainer route
 routes.post('/catch/:id', addPokemonToTrainer.create);

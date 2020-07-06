@@ -39,6 +39,18 @@ const trainerController = {
 
         return res.json(infoPokemon);   
     },
+
+    async deletePokemon(req: Request, res: Response) {
+        const { id_trainer } = req.params;
+        const { id_pokemon } = req.body;
+
+        await connection('pokemon_trainer')
+            .where('id_trainer', id_trainer)
+            .where('id_pokemon', id_pokemon)
+            .del();
+
+        return res.json({ message: 'Pokemon deleted' })
+    },
 };
 
 export default trainerController;
