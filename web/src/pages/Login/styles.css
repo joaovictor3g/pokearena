@@ -61,9 +61,11 @@
 
 .input-and-symbol svg {
     width: 40px;
-    background: #000;
+    
     height: 50px;
-    color: #FFF;
+    color: #a6a6a6;
+    border: 1px solid #000;
+    border-left: none;
 
     padding: 10px;
 
@@ -74,6 +76,7 @@
     width: 100%;
     border-radius: 8px 0 0 8px;
     border: 1px solid #000;
+    border-right: none;
 
     padding: 5px;
     height: 50px;
