@@ -12,6 +12,16 @@ const pokemonController = {
     async create(req: Request, res: Response){
         const { id_pokemon, name, description, image } = req.body;
 
+        const isPokemonAlreadyExists = await connection('pokemon')
+            .select('id_pokemon');
+
+        const idExistants = isPokemonAlreadyExists.map((id_pokemon: { id_pokemon: number }) => id_pokemon.id_pokemon);
+
+        for(var i=0; i <idExistants.length; i++) {
+            if(id_pokemon===idExistants[i])
+                return res.json({ message: 'Pokemon already caught' });
+        }
+
         await connection('pokemon')
             .insert({ 
                 id_pokemon,
