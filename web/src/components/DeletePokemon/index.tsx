@@ -1,5 +1,6 @@
 import React, { useState, MouseEvent, SetStateAction, Dispatch } from 'react';
 import api from '../../services/api';
+import {MdCancel } from 'react-icons/md';
 import './styles.css';
 
 interface Props {
@@ -28,10 +29,18 @@ const DeletePokemon: React.FC<Props> = ({ id_pokemon, id_trainer, name, onClose 
     }
 
     return (
+        <>
+        
         <div className="delete-modal">
-            <span>Tem certeza que quer excluir {name} da lista?</span>
-            <button type="button" className="btn" onClick={deletePokemon}>Exluir Pokemon</button>
+            <button className="btn-1" onClick={onClose}>
+                <MdCancel size={22}/>
+            </button>
+            <div className="container-delete">
+                <span>Tem certeza que quer excluir {name} da lista?</span>
+                <button type="button" className="btn-confirm" onClick={deletePokemon}>Exluir Pokemon</button>
+            </div>
         </div>
+        </>
     );
 }
 

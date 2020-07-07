@@ -45,9 +45,9 @@ const SeePokemonCaughtes: React.FC = () => {
             <div className="your-pokemons-content">
                 {pokemons.map((pokemon: Props) => (
                     <div key={pokemon.id_pokemon} className="content-pokemons">
-                        <div className="trash-and-id">
+                        <div className="trash-and-id">                                                                                                                                      
                             <p className="id">{pokemon.id_pokemon}</p>
-                            <button onClick={() => handleDeletePokemon(pokemon.id_pokemon, pokemon.name)}>
+                            <button className="btn" onClick={() => handleDeletePokemon(pokemon.id_pokemon, pokemon.name)}>
                                 <FiTrash2 size={22} color="#8c8c8c"/>
                             </button>
                         </div>
@@ -55,14 +55,14 @@ const SeePokemonCaughtes: React.FC = () => {
                         <img src={pokemon.image} alt="pokemon" />
                         <span className="description">{pokemon.description}</span>
 
-                        {isdeleted ? 
+                        {isdeleted ?                                                        
                             <DeletePokemon 
                                 name={namePokemon} 
                                 id_pokemon={idPokemon} 
                                 id_trainer={id} 
                                 onClose={() => setDelete(false)}
                             /> : 
-                        null}
+                        null}                                                                                                                                                                                                                                                           
                   </div>
                 ))}
             </div>

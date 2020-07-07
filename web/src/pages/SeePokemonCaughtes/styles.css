@@ -14,13 +14,14 @@
 .your-pokemons-content .content-pokemons {
     border-radius: 8px;
     padding: 20px;
+    text-align: center;
 
     margin-left: 10px;
 
     background: #FFF;
 }
 
-.your-pokemons-content .content-pokemons button {
+.your-pokemons-content .content-pokemons .btn {
     background: transparent;
     border: 0;
 }
@@ -39,6 +40,12 @@
     font-weight: bold;
     font-size: 24px;
 
+    font-family: Ubuntu;
+}
+
+.your-pokemons-content .content-pokemons .description {
+    text-align: justify;
+    font-weight: bold;
     font-family: Ubuntu;
 }
 
