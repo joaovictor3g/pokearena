@@ -1,7 +1,7 @@
 import React, { useState, MouseEvent } from 'react';
 import api from '../../services/api';
 
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import './styles.css';
 
 import { FiPower } from 'react-icons/fi';
@@ -57,31 +57,33 @@ const NewTrainer: React.FC = () => {
                 <FiPower size={32} />
             </button>
             <div className="sign-up-to">
-              <h1 className="title">Seja Bem Vindo, novo treinador</h1>
+                <h1 className="title">Seja Bem Vindo, novo treinador</h1>
 
-              <form className="input-group">
-                  <input 
-                      placeholder="Digite um usuário"
-                      type="text"
-                      onChange={e => setName(e.target.value)}
-                      value={name}
-                  />
-                  <input 
-                      placeholder="Digite uma senha"
-                      type="password"
-                      onChange={e => setPassword(e.target.value)}
-                      value={password}
+                <form className="input-group">
+                    <input 
+                        placeholder="Digite um usuário"
+                        type="text"
+                        onChange={e => setName(e.target.value)}
+                        value={name}
+                    />
+                    <input 
+                        placeholder="Digite uma senha"
+                        type="password"
+                        onChange={e => setPassword(e.target.value)}
+                        value={password}
 
-                  />
-                  <input 
-                      placeholder="Confirme a senha"
-                      type="password"
-                      onChange={e => setConfirmPassword(e.target.value)}
-                      value={confirmPassword}
-                  />
+                    />
+                    <input 
+                        placeholder="Confirme a senha"
+                        type="password"
+                        onChange={e => setConfirmPassword(e.target.value)}
+                        value={confirmPassword}
+                    />
 
-                  <button onClick={addNewTrainer}>Cadastrar</button>
-              </form>
+                    <button onClick={addNewTrainer}>Cadastrar</button>
+
+                    
+                </form>
             </div>
         </>
     );

@@ -4,6 +4,8 @@ import './styles.css';
 
 import { FiArrowRight } from 'react-icons/fi';
 import { FaEyeSlash, FaEye } from 'react-icons/fa';
+
+import ModalForgotPassword from '../../components/ModalForgotPassword';
 import api from '../../services/api';
 
 const Login = () => {
@@ -13,6 +15,9 @@ const Login = () => {
 
     const [changeEye, setChangeEye] = useState<boolean>(false);
     const history = useHistory();
+
+    // Modal de esquecer a senha visivel
+    const [isNewPasswordModalVisible, setPasswordModalVisible] = useState<boolean>(false);
 
     async function login(e: MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
@@ -77,8 +82,17 @@ const Login = () => {
                 <button type="button" className="button" onClick={login}>
                     Login
                 </button>
+
+                <button onClick={(e) => {
+                    e.preventDefault();
+                    setPasswordModalVisible(true);
+                }}>
+                        Esqueceu a senha?
+                </button>
+
                 
             </form>
+            {isNewPasswordModalVisible ? <ModalForgotPassword onClose={()=>setPasswordModalVisible(false)}/>: null}  
         </div>
     );
 };

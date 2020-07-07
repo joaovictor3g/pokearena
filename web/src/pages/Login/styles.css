@@ -85,3 +85,8 @@
 .input-and-symbol button:hover {
     opacity: 0.5;
 }
+
+.link-to-forgot-password {
+    text-decoration: none;
+    font-size: 16px;
+}
