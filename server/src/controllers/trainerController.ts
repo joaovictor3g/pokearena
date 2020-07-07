@@ -41,12 +41,16 @@ const trainerController = {
     },
 
     async deletePokemon(req: Request, res: Response) {
-        const { id_trainer } = req.params;
-        const { id_pokemon } = req.body;
+        //const { id_trainer } = req.params;
+        //const { id_pokemon } = req.body;
+        const { id_trainer, id_pokemon } = req.query;
+        
+        const idTrainer = Number(id_trainer);
+        const idPokemon = Number(id_pokemon);
 
         await connection('pokemon_trainer')
-            .where('id_trainer', id_trainer)
-            .where('id_pokemon', id_pokemon)
+            .where('id_trainer', idTrainer)
+            .where('id_pokemon', idPokemon)
             .del();
 
         return res.json({ message: 'Pokemon deleted' })
