@@ -55,6 +55,18 @@ const trainerController = {
 
         return res.json({ message: 'Pokemon deleted' })
     },
+
+    async updatePassword(req: Request, res: Response) {
+        const { id_trainer, name, password } = req.body;
+
+        await connection('trainer')
+            .update('name', name)
+            .update('password', password)
+            .where('id_trainer', id_trainer);
+
+        return res.json({ message: 'Update was done!!!' })
+    
+    },
 };
 
 export default trainerController;
