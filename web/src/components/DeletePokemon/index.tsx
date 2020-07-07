@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent, SetStateAction, Dispatch } from 'react';
+import React, { MouseEvent } from 'react';
 import api from '../../services/api';
 import {MdCancel } from 'react-icons/md';
 import './styles.css';
