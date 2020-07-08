@@ -3,7 +3,7 @@ import Knex from 'knex';
 export async function up(knex: Knex) {
     return knex.schema.createTable('nickname_pokemon', table => {
         table.increments('idNickname').primary().notNullable();
-        table.string('nickname').notNullable();
+        table.string('nickname');
         table.integer('id_trainer').notNullable();
         table.integer('id_pokemon').notNullable();
         table.foreign('id_trainer').references('id_trainer').inTable('trainer');

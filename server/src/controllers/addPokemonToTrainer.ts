@@ -6,23 +6,25 @@ const addPokemonToTrainer = {
         const { id } = req.params;
         const { idsPokemon } = req.body;
 
-        //const trx = await connection.transaction();
+        const trx = await connection.transaction();
 
         const id_trainer = Number(id);
         const id_pokemon = Number(idsPokemon);
 
-        /*const insertPokemonAndTrainer = idsPokemon
-            .split(',')
-            .map((idPokemon: string) => Number(idPokemon.trim()))
-            .map((id_pokemon: number) => {
-                return {
-                    id_pokemon,
-                    id_trainer
-                }
-            });*/
-
-        await connection('pokemon_trainer')
+        await trx('pokemon_trainer')
             .insert({ id_trainer, id_pokemon });
+
+        const [name] = await trx('pokemon')
+            .join('pokemon_trainer', 'pokemon_trainer.id_pokemon', 'pokemon.id_pokemon')
+            .where('pokemon.id_pokemon', id_pokemon)
+            .where('pokemon_trainer.id_trainer', id_trainer)
+            .select('pokemon.name');
+            
+
+        await trx('nickname_pokemon')
+            .insert({ id_trainer, id_pokemon, nickname: name.name })
+
+        await trx.commit();
         
         return res.json({ id: id_trainer });
     },

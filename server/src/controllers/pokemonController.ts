@@ -31,9 +31,6 @@ const pokemonController = {
             })
         return res.json({ message: 'Pokemon was caught' })
     },
-
-    
-
 };
 
 export default pokemonController;
