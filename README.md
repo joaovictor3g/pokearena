@@ -5,13 +5,14 @@
 A aplicação consiste em um CRUD de pokemon, ou seja você consegue criar um treinador, capturar um pokemon e relacionar com um único treinador, visualizar os pokemons capturados pelo treinador, modificar ou excluir um pokemon, logar com treinador já cadastrado. Essa aplicação tem como SGBD o postgreSql. O query builder [knex.js](http://knexjs.org/#Installation) que permite usar linguagem javascript nas consultas SQL. Um exemplo de consulta usando knex.js.
 
     SELECT em um banco qualquer.
-    
+    ```JS
         const response = await knex('tabela').select('*')
+    ```
 
     EM sql 
-
+    ```SQL
         SELECT * FROM tabela
-
+    ```
 
 ### Techs (Backend)
 - NodeJs
