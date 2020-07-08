@@ -37,6 +37,16 @@ const addPokemonToTrainer = {
         
         return res.json(response)
     },
+    async updateName(req: Request, res: Response) {
+        const { pokemonName, pokemonId, trainerId } = req.body;
+    
+        await connection('nickname_pokemon')
+            .update('nickname', pokemonName)
+            .where('id_pokemon', pokemonId)
+            .where('id_trainer', trainerId);
+
+        return res.json({ message: `The name ${pokemonName} was updated` });
+    }
 };
 
 export default addPokemonToTrainer;

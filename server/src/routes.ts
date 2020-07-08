@@ -11,7 +11,6 @@ const routes = Router();
 // Rotas dos Pokemons
 routes.get('/see-all-pokemons', pokemonController.index);
 routes.post('/catch-pokemons', pokemonController.create);
-routes.put('/update-pokemon', pokemonController.updateName);
 
 // Rotas dos Treinadores
 routes.post('/', trainerController.create);
@@ -23,6 +22,7 @@ routes.put('/forgot-password', trainerController.updatePassword);
 // Add Pokemon to trainer route
 routes.post('/catch/:id', addPokemonToTrainer.create);
 routes.get('/see-pokemons-caught/:id', addPokemonToTrainer.show);
+routes.put('/update-pokemon', addPokemonToTrainer.updateName);
 
 routes.get('/see-infos/:id_pokemon', addAbility.create);
 routes.get('/see-pokemon-infos/:id_pokemon', addAbility.index);

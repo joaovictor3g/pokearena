@@ -32,15 +32,7 @@ const pokemonController = {
         return res.json({ message: 'Pokemon was caught' })
     },
 
-    async updateName(req: Request, res: Response) {
-        const { pokemonName, pokemonId, trainerId } = req.body;
     
-        await connection('pokemon')
-            .update('name', pokemonName)
-            .where('id_pokemon', pokemonId)
-
-        return res.json({ message: 'Pokemon name updated' });
-    }
 
 };
 
