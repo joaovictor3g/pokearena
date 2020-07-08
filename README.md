@@ -12,4 +12,7 @@
 - Clone este repositório: `git clone https://github.com/joaovictor3g/game-pokearena`
 - cd game-pokearena
 - cd server && run `yarn knex:migrate` para rodar as migrations.
+- Criar database Pokemon
 - Após isto no mesmo diretório rode `yarn dev`, para executar o backend da aplicação na porta :3333
+
+### Rotas (backend)
