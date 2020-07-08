@@ -32,12 +32,39 @@ const trainerController = {
 
         const result = idPokemon.map(id => id.id_pokemon);
 
+
+        /*if(isAlreadyNicknameExists) {
+            try {
+                const infoPokemon = await connection('pokemon')
+                .select('*')
+                .whereIn('pokemon.id_pokemon', result)
+                .distinct();
+            
+                console.log(infoPokemon, 'entrou aqui');
+
+                return res.json(infoPokemon);
+            } catch(err) {
+                console.log('deu erro')
+            }
+        }
+        else {
+            const infoPokemon = await connection('pokemon')
+                .join('nickname_pokemon', 'nickname_pokemon.id_pokemon', 'pokemon.id_pokemon')
+                .join('trainer', 'trainer.id_trainer', 'nickname_pokemon.id_trainer')
+                .whereIn('nickname_pokemon.id_pokemon', result)
+                .where('trainer.id_trainer', id)
+                .select('nickname_pokemon.nickname', 'pokemon.*')
+            
+            console.log('entrou no else')
+
+            return res.json(infoPokemon);   
+        }*/
         const infoPokemon = await connection('pokemon')
             .select('*')
             .whereIn('pokemon.id_pokemon', result)
             .distinct();
-
-        return res.json(infoPokemon);   
+    
+            return res.json(infoPokemon);
     },
 
     async deletePokemon(req: Request, res: Response) {

@@ -41,9 +41,7 @@ const addPokemonToTrainer = {
         const { pokemonName, pokemonId, trainerId } = req.body;
     
         await connection('nickname_pokemon')
-            .update('nickname', pokemonName)
-            .where('id_pokemon', pokemonId)
-            .where('id_trainer', trainerId);
+            .insert({ nickname: pokemonName, id_trainer: trainerId, id_pokemon: pokemonId })
 
         return res.json({ message: `The name ${pokemonName} was updated` });
     }
