@@ -11,6 +11,7 @@ const routes = Router();
 // Rotas dos Pokemons
 routes.get('/see-all-pokemons', pokemonController.index);
 routes.post('/catch-pokemons', pokemonController.create);
+routes.put('/update-pokemon', pokemonController.updateName);
 
 // Rotas dos Treinadores
 routes.post('/', trainerController.create);
