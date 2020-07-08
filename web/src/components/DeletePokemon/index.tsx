@@ -1,6 +1,9 @@
-import React, { MouseEvent } from 'react';
+import React, { MouseEvent, useState } from 'react';
 import api from '../../services/api';
 import {MdCancel } from 'react-icons/md';
+
+import Alert from '../Alert';
+
 import './styles.css';
 
 interface Props {
@@ -17,11 +20,9 @@ const DeletePokemon: React.FC<Props> = ({ id_pokemon, id_trainer, name, onClose 
             const response = await api.delete(`/delete?id_trainer=${id_trainer}&id_pokemon=${id_pokemon}`);
 
             if(!response.data) {
-                alert('Exclusão não concluída');
                 onClose();
                 return;
             }
-            alert('Exclusão com sucesso');
             onClose();
             
         } catch(err) {}

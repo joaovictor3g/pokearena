@@ -6,6 +6,7 @@ import { FaEdit } from 'react-icons/fa';
 import Header from '../../components/Header';
 import DeletePokemon from '../../components/DeletePokemon';
 import ModalUpdatePokemon from '../../components/ModalUpdatePokemon';
+import Alert from '../../components/Alert';
 
 import './styles.css';
 
@@ -28,6 +29,8 @@ const SeePokemonCaughtes: React.FC = () => {
 
     const [isUpdate, setUpdate] = useState<boolean>(false);
 
+    const [isSubmited, setSubmited] = useState<boolean>(false);
+    
 
     async function getInfos() {
         const response = await api.get(`/see-your-pokemons/${id}`);
@@ -46,6 +49,7 @@ const SeePokemonCaughtes: React.FC = () => {
 
         setIdPokemon(id_pokemon);
         setNamePokemon(name);
+        setSubmited(true);
     }
 
     function handleUpdatePokemon(idPokemon: number, name: string) {
@@ -92,7 +96,9 @@ const SeePokemonCaughtes: React.FC = () => {
                                 onClose={() => setUpdate(false)}
                                 id_trainer={id}
                             /> : 
-                        null}                                                                                                                                                                                                                                                          
+                        null}   
+
+                                                                                                                                                                                                                                                                            
                   </div>
                 ))}
             </div>
