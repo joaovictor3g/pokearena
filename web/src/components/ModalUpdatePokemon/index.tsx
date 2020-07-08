@@ -1,15 +1,38 @@
-import React from 'react';
+import React, { useState, MouseEvent } from 'react';
 import { MdCancel } from 'react-icons/md';
 
 import './styles.css';
-
+import api from '../../services/api';
 interface Props {
     pokemonName: string,
     pokemonId: number,
-    onClose: () => void
+    onClose: () => void,
+    id_trainer: number
 }
 
-const ModalUpdatePokemon: React.FC<Props> = ({ pokemonName, pokemonId, onClose }) => {
+const ModalUpdatePokemon: React.FC<Props> = ({ pokemonName, pokemonId, onClose, id_trainer }) => {
+    const [nickname, setNickname] = useState<string>('');
+
+    async function handleSubmit(e: MouseEvent<HTMLButtonElement>) {
+        e.preventDefault();
+
+        const data = { pokemonName: nickname, pokemonId, trainerId: id_trainer };
+
+        console.log(data);
+
+        try {
+            const response = await api.put("/update-pokemon", data);
+
+            if(!response.data) {
+                alert('Pokemon não atualizado');
+                return;
+            }
+
+            alert('Pokemon atualizado')
+        } catch(err) {
+        }
+    }
+    
     return (
         <>
         <div className="modal-update-container">
@@ -17,8 +40,13 @@ const ModalUpdatePokemon: React.FC<Props> = ({ pokemonName, pokemonId, onClose }
                 <MdCancel size={22}/>
             </button>
             <div className="space-between">
-                <input className="change-name" placeholder={`Digite um 'apelido' para ${pokemonName}`}/>
-                <button className="update">Atualizar apelido</button>
+                <input 
+                    className="change-name" 
+                    placeholder={`Digite um 'apelido' para ${pokemonName}`}
+                    onChange={e => setNickname(e.target.value)}
+                    value={nickname}
+                />
+                <button onClick={handleSubmit} className="update">Atualizar apelido</button>
             </div>
         </div>
         </>

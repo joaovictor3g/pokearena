@@ -11,6 +11,7 @@ import './styles.css';
 
 interface Props { 
     name: string, 
+    nickname?: string,
     id_pokemon: number, 
     image: string, 
     description: string 
@@ -54,12 +55,12 @@ const SeePokemonCaughtes: React.FC = () => {
                     <div key={pokemon.id_pokemon} className="content-pokemons">
                         <div className="trash-and-id">                                                                                                                                      
                             <p className="id">{pokemon.id_pokemon}</p>
-                            <p className="name">{pokemon.name}</p>
+                            <p className="name">{pokemon.nickname  || pokemon.name}</p>
                             <div className="edit-pokemon">
-                                <button className="btn" onClick={() => handleDeletePokemon(pokemon.id_pokemon, pokemon.name)}>
+                                <button className="btn" onClick={() => handleDeletePokemon(pokemon.id_pokemon, (pokemon.nickname || pokemon.name))}>
                                     <FiTrash2 size={22} color="#8c8c8c"/>
                                 </button>
-                                <button className="btn" onClick={() => handleUpdatePokemon(pokemon.id_pokemon, pokemon.name)}>
+                                <button className="btn" onClick={() => handleUpdatePokemon(pokemon.id_pokemon, (pokemon.nickname || pokemon.name))}>
                                     <FaEdit size={22} color="#8c8c8c" />
                                 </button>
                             </div>
@@ -80,8 +81,9 @@ const SeePokemonCaughtes: React.FC = () => {
                         {isUpdate ?
                             <ModalUpdatePokemon 
                                 pokemonName={namePokemon} 
-                                pokemonId={id}
+                                pokemonId={idPokemon}
                                 onClose={() => setUpdate(false)}
+                                id_trainer={id}
                             /> : 
                         null}                                                                                                                                                                                                                                                          
                   </div>
