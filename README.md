@@ -16,3 +16,10 @@
 - Após isto no mesmo diretório rode `yarn dev`, para executar o backend da aplicação na porta :3333
 
 ### Rotas (backend)
+
+|      |Pokemon  |Trainer               |
+|------|---------|----------------------|
+| GET  |         |/see-your-pokemons/:id|
+|POST  |         |/ && /login
+|PUT   |         |/forgot-password
+|DELETE|         |/delete
