@@ -1,0 +1,60 @@
+.modal-update-container {
+    width: 800px;
+    height: 200px;
+    font-weight: normal;
+    margin-top: 100px;
+    
+    padding: 20px;
+
+
+    content: '';
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background: rgba(#000, .5);
+    z-index: 2;
+    align-items: center;
+
+    border: 1px solid crimson;
+    border-radius: 5px;
+
+    background: #FFF;
+
+    margin: auto;
+}
+
+.modal-update-container .change-name {
+    width: 100%;
+    height: 50px;
+    padding: 5px;
+
+    border-radius: 5px;
+    margin-right: 5px;
+
+    border: 1px solid crimson;
+}
+
+.modal-update-container .exit {
+    background: transparent;
+    border: 0;
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.modal-update-container .space-between .update {
+    height: 50px;
+
+    background: crimson;
+    border: 0;
+
+    border-radius: 5px;
+    color: #FFF;
+    font-weight: bold;
+    font-family: Ubuntu;
+    font-size: 16px;
+    width: 25%;
+}
+
+.modal-update-container .space-between {
+    display: flex;
+    justify-content: space-between;
+}

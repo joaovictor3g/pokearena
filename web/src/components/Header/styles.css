@@ -1,0 +1,17 @@
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+
+    background: crimson;
+
+    align-items: center;
+}
+
+.header-content .title {
+    color: #FFF;
+    font-weight: bold;
+
+    font-family: Ubuntu;
+    font-size: 28px;
+}

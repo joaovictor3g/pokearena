@@ -89,10 +89,10 @@ const Login = () => {
                 }}>
                         Esqueceu a senha?
                 </button>
-
+                {isNewPasswordModalVisible ? <ModalForgotPassword onClose={()=>setPasswordModalVisible(false)}/>: null} 
                 
             </form>
-            {isNewPasswordModalVisible ? <ModalForgotPassword onClose={()=>setPasswordModalVisible(false)}/>: null}  
+              
         </div>
     );
 };
