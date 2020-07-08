@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent } from 'react';
+import React, { useState, MouseEvent, useEffect } from 'react';
 import { MdCancel } from 'react-icons/md';
 
 import './styles.css';
@@ -13,12 +13,12 @@ interface Props {
 const ModalUpdatePokemon: React.FC<Props> = ({ pokemonName, pokemonId, onClose, id_trainer }) => {
     const [nickname, setNickname] = useState<string>('');
 
+    useEffect(() => {}, [nickname])
+
     async function handleSubmit(e: MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
 
         const data = { pokemonName: nickname, pokemonId, trainerId: id_trainer };
-
-        console.log(data);
 
         try {
             const response = await api.put("/update-pokemon", data);

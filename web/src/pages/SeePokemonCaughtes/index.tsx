@@ -28,10 +28,17 @@ const SeePokemonCaughtes: React.FC = () => {
 
     const [isUpdate, setUpdate] = useState<boolean>(false);
 
-    useEffect(() => {
-        api.get(`/see-your-pokemons/${id}`)
-            .then(res => setPokemons(res.data))
 
+    async function getInfos() {
+        const response = await api.get(`/see-your-pokemons/${id}`);
+
+        setPokemons(response.data);
+    }
+
+    useEffect(() => {
+        getInfos();
+        
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pokemons, id]);
 
     function handleDeletePokemon(id_pokemon: number, name: string) {
@@ -51,8 +58,8 @@ const SeePokemonCaughtes: React.FC = () => {
         <>      
             <Header title="Veja os Pokemons que você capturou" id_trainer={id}/>
             <div className="your-pokemons-content">
-                {pokemons.map((pokemon: Props) => (
-                    <div key={pokemon.id_pokemon} className="content-pokemons">
+                {pokemons.map((pokemon: Props, idx: number) => (
+                    <div key={idx} className="content-pokemons">
                         <div className="trash-and-id">                                                                                                                                      
                             <p className="id">{pokemon.id_pokemon}</p>
                             <p className="name">{pokemon.nickname  || pokemon.name}</p>
