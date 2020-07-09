@@ -4,7 +4,7 @@ import connection from '../database/connection';
 const trainerController = {
     async create(req: Request, res: Response) {
         const { name, password } = req.body;
-        
+
         await connection('trainer')
             .insert({ name, password });
         
@@ -74,6 +74,14 @@ const trainerController = {
         return res.json({ message: 'Update was done!!!' })
     
     },
+
+    async addImageProfile(req: Request, res: Response) {
+        const { id } = req.params;
+
+        await connection('trainer_image').insert({ id_trainer: id, image: req.file.filename });
+
+        return res.json({ message: 'Alright' })
+    }
 };
 
 export default trainerController;
