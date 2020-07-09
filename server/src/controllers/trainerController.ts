@@ -78,9 +78,11 @@ const trainerController = {
     async addImageProfile(req: Request, res: Response) {
         const { id } = req.params;
 
-        const response = await connection('trainer_image').select('*');
+        const response = await connection('trainer_image').select('id_trainer');
 
-        if(!response) {
+        const result = response.map((id_trainer: number)=>id_trainer)
+
+        if(!result.includes(Number(id))) {
             await connection('trainer_image').insert({ id_trainer: id, image: req.file.filename });
 
             return res.json({ message: 'Alright' })
