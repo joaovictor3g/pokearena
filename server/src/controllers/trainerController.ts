@@ -78,9 +78,15 @@ const trainerController = {
     async addImageProfile(req: Request, res: Response) {
         const { id } = req.params;
 
+        //const connection = await connection.transaction();
+
         const response = await connection('trainer_image').select('id_trainer');
 
-        const result = response.map((id_trainer: number)=>id_trainer)
+        const result = response.map((id_trainer: {id_trainer: number})=>id_trainer.id_trainer);
+
+        console.log(result);
+
+        console.log(result.includes(Number(id)))
 
         if(!result.includes(Number(id))) {
             await connection('trainer_image').insert({ id_trainer: id, image: req.file.filename });
@@ -88,8 +94,12 @@ const trainerController = {
             return res.json({ message: 'Alright' })
         }
 
-        await connection('trainer_image').update('image', req.file.filename).where('id_trainer', id);
-        
+        await connection('trainer_image')
+            .update('image', req.file.filename)
+            .where('id_trainer', id);
+            
+        //connection.commit();
+
         return res.json({ message: 'Updated' })
     },
 
