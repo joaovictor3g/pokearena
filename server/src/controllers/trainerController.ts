@@ -77,28 +77,29 @@ const trainerController = {
 
     async addImageProfile(req: Request, res: Response) {
         const { id } = req.params;
+        const { password } = req.body;
 
-        //const connection = await connection.transaction();
+        const trx = await connection.transaction();
 
-        const response = await connection('trainer_image').select('id_trainer');
+        const response = await trx('trainer_image').select('id_trainer');
 
         const result = response.map((id_trainer: {id_trainer: number})=>id_trainer.id_trainer);
 
-        console.log(result);
-
-        console.log(result.includes(Number(id)))
-
         if(!result.includes(Number(id))) {
-            await connection('trainer_image').insert({ id_trainer: id, image: req.file.filename });
+            await trx('trainer_image').insert({ id_trainer: id, image: req.file.filename });
 
             return res.json({ message: 'Alright' })
         }
 
-        await connection('trainer_image')
+        await trx('trainer')
+            .update('password', password)
+            .where('id_trainer', id);
+
+        await trx('trainer_image')
             .update('image', req.file.filename)
             .where('id_trainer', id);
             
-        //connection.commit();
+        await trx.commit();
 
         return res.json({ message: 'Updated' })
     },
@@ -109,7 +110,7 @@ const trainerController = {
         const response = await connection('trainer')
             .join('trainer_image', 'trainer_image.id_trainer', 'trainer.id_trainer')
             .where('trainer.id_trainer', '=', id)
-            .select('trainer_image.image')
+            .select('trainer_image.image', 'trainer.name')
             .distinct();
         
         return res.json(response)
