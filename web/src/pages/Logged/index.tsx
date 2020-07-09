@@ -4,6 +4,12 @@ import axios from 'axios';
 import './styles.css';
 
 import PokeInfo from '../../components/PokeInfo';
+import ImageProfile from '../../assets/image_profile.jpeg'
+import api from '../../services/api';
+
+interface ImageProp {
+  image: string
+}
 
 const Logged = () => {
     const [pokemons, setPokemons] = useState<[]>([]);
@@ -16,9 +22,34 @@ const Logged = () => {
     const [description, setDescription] = useState<string>('');
     const [pokemonName, setPokemonName] = useState<string>('');
 
+    const [image_profile, setImage] = useState<ImageProp>();
+
     useEffect(() => {
         getResponsePokemon();
     }, []);
+
+    useEffect(() => {
+      const id = sessionStorage.getItem('id_trainer');
+
+      console.log(id)
+
+      async function getAllInfos() {
+        try { 
+            const res = await api.get(`/get-all-infos/${id}`);
+
+            if(res.data[0]) {
+              console.log(res.data)
+
+              setImage(res.data[0]);
+            
+            }
+        } catch(err) {}
+        
+      }
+
+      getAllInfos();
+      
+    }, [])
 
     async function getResponsePokemon(offset=0) {
         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=5`);
@@ -62,58 +93,65 @@ const Logged = () => {
     }
 
     return (
-        <>    
-            <header className="header">Capture seus pokemons</header>
-            
-            <div className="container-all">
-                <Link to={`/see-your-pokemons/${sessionStorage.getItem('id_trainer')}`} className="link-to-see-pokemons">
-                    Capturou algum? Veja seus pokemos já capturados.
-                </Link>
-                <Link to={`/edit-profile/${sessionStorage.getItem('id_trainer')}`}>
-                  Editar perfil
-                </Link>
-                <table className="table-container">
-                <tbody>
-                    <tr className="initial-tr">
-                      <td>ID</td>
-                      <td>Nome</td>
-                      <td></td>
-                      <td></td>
-
-                    </tr>
-                    {pokemons.map((pokemon: { name: string }, index: number) => (
-                      <tr key={index + 1}>
-                        <td className="id-td">{index + 1 + pages}</td>
-                        <td className="td-name">{capitalizeFirstLetter(pokemon.name)}</td>
-                        <td className="image-td">
-                          <img
-                            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index+1+pages}.png`}
-                            alt="pokemon"
-                          />
-                        </td>
-                    
-                        <td className="actions-column">
-                          
-                          <button onClick={() => handlePokeInfoVisible(index+1+pages, pokemon.name)} className="btn-2">
-                                Capturar
-                          </button>
-
-                          {isPokeInfoVisbile ? 
-                            <PokeInfo 
-                              pokedexNumber={pokedexNumber}
-                              name={pokemonName}
-                              setDescription={setDescription}
-                              onClose={()=>setPokeInfoVisible(false)}
-                            /> : null}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
+        <>   
+            { !image_profile && !pokemons ? <p>Carregando.....</p> : (
+                <>
+                  <header className="header">
+                    Capture seus pokemons
+                    <Link to={`/edit-profile/${sessionStorage.getItem('id_trainer')}`}>
+                      <img src={`http://192.168.0.106:3333/uploads/${image_profile?.image}` || ImageProfile} alt="profile"/>
+                    </Link>
+                  </header>
                   
-                </table>
-                <button onClick={goToPreviousPage} className="next">Anterior</button>
-                <button onClick={nextPage} className="previous" >Proximo</button>
-            </div>
+                  <div className="container-all">
+                      <Link to={`/see-your-pokemons/${sessionStorage.getItem('id_trainer')}`} className="link-to-see-pokemons">
+                          Capturou algum? Veja seus pokemos já capturados.
+                      </Link>
+                      
+                      <table className="table-container">
+                      <tbody>
+                          <tr className="initial-tr">
+                            <td>ID</td>
+                            <td>Nome</td>
+                            <td></td>
+                            <td></td>
+                  
+                          </tr>
+                          {pokemons.map((pokemon: { name: string }, index: number) => (
+                            <tr key={index + 1}>
+                              <td className="id-td">{index + 1 + pages}</td>
+                              <td className="td-name">{capitalizeFirstLetter(pokemon.name)}</td>
+                              <td className="image-td">
+                                <img
+                                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index+1+pages}.png`}
+                                  alt="pokemon"
+                                />
+                              </td>
+                          
+                              <td className="actions-column">
+                                
+                                <button onClick={() => handlePokeInfoVisible(index+1+pages, pokemon.name)} className="btn-2">
+                                      Capturar
+                                </button>
+                          
+                                {isPokeInfoVisbile ? 
+                                  <PokeInfo 
+                                    pokedexNumber={pokedexNumber}
+                                    name={pokemonName}
+                                    setDescription={setDescription}
+                                    onClose={()=>setPokeInfoVisible(false)}
+                                  /> : null}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                                
+                      </table>
+                      <button onClick={goToPreviousPage} className="next">Anterior</button>
+                      <button onClick={nextPage} className="previous" >Proximo</button>
+                  </div>
+            </>
+            )}
         </>
     );
 };

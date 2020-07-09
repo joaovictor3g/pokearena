@@ -1,0 +1,76 @@
+.edit-profile {
+    text-align: center;
+    display: flex;
+
+    margin: 0 auto;
+}
+
+.edit-profile .form-data {
+    margin: 70px auto;
+    padding: 20px;
+    border-radius: 5px;
+    justify-content: center;
+    width: 500px;
+    text-align: center;
+    background: #FFF;
+}
+
+.edit-profile .form-data input {
+    display: block;
+    width: 100%;
+
+    height: 50px;
+    margin-bottom: 10px;
+
+    border-radius: 5px;
+    border: 1px solid #000;
+    padding: 10px;
+}
+
+.edit-profile .form-data .dropzone {
+    height: 250px;
+    width: 250px;
+    background: #E1FAEC;
+    border-radius: 50%;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: 0;
+
+    margin: auto;
+    margin-bottom: 10px;
+  }
+  
+  .dropzone div img {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover;
+
+    border-radius: 50%;
+  }
+  
+  .dropzone div {
+    width: calc(100% - 50px);
+    height: calc(100% - 60px);
+    border-radius: 50%;
+    border: 1px dashed #4ECB79;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+  }
+  
+
+.save-button {
+    width: 100%;
+    height: 50px;
+    font-weight: bold;
+    font-size: 20px;
+    color: #FFF;
+    background: crimson;
+    border: 0;
+    border-radius: 5px;
+}
