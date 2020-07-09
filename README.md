@@ -42,6 +42,8 @@ A aplicação consiste em um CRUD de pokemon, ou seja você consegue criar um tr
 ### Modelagem do banco
 <img src="assets/modelagem_pokemon.svg" alt="modelagem">
 
+Ou veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-pokearena/master/assets/modelagem_pokemon.svg)
+
 ### Como rodar?
 - Clone este repositório: `git clone https://github.com/joaovictor3g/game-pokearena`
 - cd game-pokearena
