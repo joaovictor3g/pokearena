@@ -2,6 +2,8 @@ import React, { useState, useCallback, MouseEvent } from 'react';
 import api from '../../services/api';
 import Dropzone from 'react-dropzone';
 
+import Header from '../../components/Header';
+
 import { FiUpload } from 'react-icons/fi';
 import './styles.css';
 
@@ -19,6 +21,7 @@ const EditProfile: React.FC = () => {
 
       if(selectedFile)
         data.append('image', selectedFile);
+      data.append('password', password);
       
       try {
         const response = await api.post(`/edit-profile/${id_trainer}`, data);
@@ -35,6 +38,8 @@ const EditProfile: React.FC = () => {
     }
 
     return (
+      <>
+      <Header title="Edite suas informações" id_trainer={Number(sessionStorage.getItem('id_trainer'))}/>
       <div className="edit-profile">
         <form className="form-data">
         <Dropzone onDrop={
@@ -73,6 +78,7 @@ const EditProfile: React.FC = () => {
           <button className="save-button" type="button" onClick={handleSubmit}>Salvar</button>
         </form>
       </div>
+      </>
     );
 }
 

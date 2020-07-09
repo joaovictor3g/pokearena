@@ -199,6 +199,7 @@ tr:nth-child(odd) {
 
 .link-and-image-back .link {
     background: crimson;
+    border: 2px solid #FFF;
     width: 50px;
     padding: 5px;
     border-radius: 5px;

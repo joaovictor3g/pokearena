@@ -10,7 +10,8 @@ import ImageProfile from '../../assets/image_profile.jpeg'
 import api from '../../services/api';
 
 interface ImageProp {
-  image: string
+  image: string, 
+  name: string
 }
 
 const Logged = () => {
@@ -39,6 +40,9 @@ const Logged = () => {
       async function getAllInfos() {
         try { 
             const res = await api.get(`/get-all-infos/${id}`);
+
+            if(image_profile?.name)
+              sessionStorage.setItem('name', image_profile?.name)
 
             if(res.data[0]) {
               setImage(res.data[0]);
@@ -98,7 +102,7 @@ const Logged = () => {
             { !pokemons ? <p>Carregando.....</p> : (
                 <>
                   <header className="header">
-                    Capture seus pokemons
+                    Capture seus pokemons, {image_profile?.name}
                     <div className="link-and-image-back">
                       <Link to={`/edit-profile/${sessionStorage.getItem('id_trainer')}`}>
                         <img src={image_profile?.image ? `http://192.168.0.106:3333/uploads/${image_profile?.image}` : ImageProfile} alt="profile"/>
@@ -108,7 +112,7 @@ const Logged = () => {
                         sessionStorage.clear(); 
                         history.push('/');
                         }} className="link">
-                        <FiPower size={32} color="#000"/>
+                        <FiPower size={32} color="#FFF"/>
                       
                       </button>
                     </div>
