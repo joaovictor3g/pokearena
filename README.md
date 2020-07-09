@@ -13,6 +13,23 @@ A aplicação consiste em um CRUD de pokemon, ou seja você consegue criar um tr
     ```SQL
         SELECT * FROM tabela
     ```
+    Criação de tabela no knex
+    ```JS
+        import Knex from 'knex';
+
+        export async function up(knex: Knex) {
+            return knex.schema.createTable('pokemon', table => {
+                table.integer('id_pokemon').primary().notNullable();
+                table.string('name').notNullable();
+                table.string('image').notNullable();
+                table.string('description').notNullable();
+            });
+        }
+
+        export async function down(knex: Knex) {
+            return knex.schema.dropTable('pokemon');
+        }
+    ```
 
 ### Techs (Backend)
 - NodeJs
