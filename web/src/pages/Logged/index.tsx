@@ -1,6 +1,8 @@
 import React, { useEffect, useState, MouseEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { FiPower } from 'react-icons/fi';
+
 import './styles.css';
 
 import PokeInfo from '../../components/PokeInfo';
@@ -13,6 +15,7 @@ interface ImageProp {
 
 const Logged = () => {
     const [pokemons, setPokemons] = useState<[]>([]);
+    const history = useHistory();
     
     const [pages, setPages] = useState<number>(0);
     const [count, setCount] = useState<number>(0);
@@ -38,8 +41,6 @@ const Logged = () => {
             const res = await api.get(`/get-all-infos/${id}`);
 
             if(res.data[0]) {
-              console.log(res.data)
-
               setImage(res.data[0]);
             
             }
@@ -49,7 +50,7 @@ const Logged = () => {
 
       getAllInfos();
       
-    }, [])
+    }, [image_profile])
 
     async function getResponsePokemon(offset=0) {
         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=5`);
@@ -94,13 +95,23 @@ const Logged = () => {
 
     return (
         <>   
-            { !image_profile && !pokemons ? <p>Carregando.....</p> : (
+            { !pokemons ? <p>Carregando.....</p> : (
                 <>
                   <header className="header">
                     Capture seus pokemons
-                    <Link to={`/edit-profile/${sessionStorage.getItem('id_trainer')}`}>
-                      <img src={`http://192.168.0.106:3333/uploads/${image_profile?.image}` || ImageProfile} alt="profile"/>
-                    </Link>
+                    <div className="link-and-image-back">
+                      <Link to={`/edit-profile/${sessionStorage.getItem('id_trainer')}`}>
+                        <img src={image_profile?.image ? `http://192.168.0.106:3333/uploads/${image_profile?.image}` : ImageProfile} alt="profile"/>
+                      </Link>
+                      <button type="button" onClick={e=>{ 
+                        e.preventDefault()
+                        sessionStorage.clear(); 
+                        history.push('/');
+                        }} className="link">
+                        <FiPower size={32} color="#000"/>
+                      
+                      </button>
+                    </div>
                   </header>
                   
                   <div className="container-all">

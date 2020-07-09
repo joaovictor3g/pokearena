@@ -29,6 +29,7 @@ const ModalUpdatePokemon: React.FC<Props> = ({ pokemonName, pokemonId, onClose, 
             }
 
             alert('Pokemon atualizado')
+            onClose();
         } catch(err) {
         }
     }
