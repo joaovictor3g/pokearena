@@ -22,6 +22,7 @@ routes.get('/see-your-pokemons/:id', trainerController.show);
 routes.post('/login',trainerController.signIn);
 routes.delete('/delete', trainerController.deletePokemon);
 routes.put('/forgot-password', trainerController.updatePassword);
+routes.get('/get-all-infos/:id', trainerController.getAllInfos);
 
 // Add Pokemon to trainer route
 routes.post('/catch/:id', addPokemonToTrainer.create);

@@ -78,10 +78,30 @@ const trainerController = {
     async addImageProfile(req: Request, res: Response) {
         const { id } = req.params;
 
-        await connection('trainer_image').insert({ id_trainer: id, image: req.file.filename });
+        const response = await connection('trainer_image').select('*');
 
-        return res.json({ message: 'Alright' })
+        if(!response) {
+            await connection('trainer_image').insert({ id_trainer: id, image: req.file.filename });
+
+            return res.json({ message: 'Alright' })
+        }
+
+        await connection('trainer_image').update('image', req.file.filename).where('id_trainer', id);
+        
+        return res.json({ message: 'Updated' })
+    },
+
+    async getAllInfos(req: Request, res: Response) {
+        const { id } = req.params;
+
+        const response = await connection('trainer')
+            .join('trainer_image', 'trainer_image.id_trainer', 'trainer.id_trainer')
+            .where('trainer.id_trainer', '=', id)
+            .select('trainer_image.image')
+            .distinct();
+        
+        return res.json(response)
     }
-};
+}; 
 
 export default trainerController;
