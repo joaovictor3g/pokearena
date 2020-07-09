@@ -43,9 +43,10 @@ A aplicação consiste em um CRUD de pokemon, ou seja você consegue criar um tr
 - Clone este repositório: `git clone https://github.com/joaovictor3g/game-pokearena`
 - cd game-pokearena
 - Criar database Pokemon, em qualquer ferramenta de gerenciamento de banco (PgAdmin4, Postico...).
-- cd server && run `yarn knex:migrate` para rodar as migrations.
+- rode `yarn` para instalar todas as dependências, caso não temha yarn, pode usar `npm install` para instalá-las.
+- cd server && run `yarn knex:migrate` ou `npm run knex:migrate` para rodar as migrations.
 - Rode `yarn knex:rollback` caso queira excluir todas as tabelas do banco.
-- Após isto no mesmo diretório rode `yarn dev`, para executar o backend da aplicação em modo de desenvolvimento. Com isso sua aplicação estará rodando no seguinte endereço: `http://localhost:3333`. Caso seja necessário testar as rotas do backend pode ser usado um software chamado Imsomnia.
+- Após isto no mesmo diretório rode `yarn dev` ou `npm run dev`, para executar o backend da aplicação em modo de desenvolvimento. Com isso sua aplicação estará rodando no seguinte endereço: `http://localhost:3333`. Caso seja necessário testar as rotas do backend pode ser usado um software chamado Imsomnia.
 
 ### Rotas (backend)
 
