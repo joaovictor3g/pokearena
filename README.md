@@ -39,6 +39,9 @@ A aplicação consiste em um CRUD de pokemon, ou seja você consegue criar um tr
 - AXIOS
 - SGBD: PostgreSql
 
+### Modelagem do banco
+<img src="assets/modelagem_pokemon.svg" alt="modelagem">
+
 ### Como rodar?
 - Clone este repositório: `git clone https://github.com/joaovictor3g/game-pokearena`
 - cd game-pokearena
@@ -57,4 +60,18 @@ A aplicação consiste em um CRUD de pokemon, ou seja você consegue criar um tr
 |PUT   |         |/forgot-password
 |DELETE|         |/delete
 
+
+### Techs(FrontEnd)
+- AXIOS
+- react-dropzone
+- react-router-dom
+- TypeScript
+- react-icons
+
+### Como rodar?
+- Com este repositório clonado e dentro do diretório do mesmo, vá até cd web.
+- Rode `yarn` ou `npm install` para instalar todas as dependências. 
+- Rode `yarn start` ou `npm start` para iniciar a aplicação.
+- Com isso a aplicação estará rodando no endereço `http://localhost:3000`.
+- Tenha certeza que o backend foi iniciado, para que todas as funcionalidades, sejam habilitadas.
 
