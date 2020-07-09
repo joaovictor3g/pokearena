@@ -69,6 +69,9 @@ const Logged = () => {
                 <Link to={`/see-your-pokemons/${sessionStorage.getItem('id_trainer')}`} className="link-to-see-pokemons">
                     Capturou algum? Veja seus pokemos já capturados.
                 </Link>
+                <Link to={`/edit-profile/${sessionStorage.getItem('id_trainer')}`}>
+                  Editar perfil
+                </Link>
                 <table className="table-container">
                 <tbody>
                     <tr className="initial-tr">
