@@ -53,6 +53,31 @@ Ou veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-p
 - Rode `yarn knex:rollback` caso queira excluir todas as tabelas do banco.
 - Após isto no mesmo diretório rode `yarn dev` ou `npm run dev`, para executar o backend da aplicação em modo de desenvolvimento. Com isso sua aplicação estará rodando no seguinte endereço: `http://localhost:3333`. Caso seja necessário testar as rotas do backend pode ser usado um software chamado Imsomnia.
 
+Crie esta trigger:
+```SQL
+CREATE OR REPLACE FUNCTION add_modifications()
+RETURNS TRIGGER AS $$ 
+	BEGIN 
+		IF(TG_OP='INSERT') THEN
+			INSERT INTO changelog(description) 
+            VALUES ('Treinador com id: ' || NEW.id_trainer || ' 	capturou pokemon com id: '|| NEW.id_pokemon);
+            RETURN NEW;
+		END IF;
+		IF(TG_OP='DELETE') THEN
+			INSERT INTO changelog(description) 
+            VALUES ('Treinador com id: ' || NEW.id_trainer || ' deletou pokemon com id: ' || NEW.id_pokemon);
+            RETURN NEW;
+		END IF;
+	END; 
+$$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER modifications
+	AFTER INSERT OR DELETE ON pokemon_trainer
+	FOR EACH ROW
+	EXECUTE PROCEDURE add_modifications();
+```
+
 ### Rotas (backend)
 
 |      |Pokemon  |Trainer               |
