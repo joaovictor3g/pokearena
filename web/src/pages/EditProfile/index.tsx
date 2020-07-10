@@ -1,7 +1,7 @@
 import React, { useState, useCallback, MouseEvent } from 'react';
 import api from '../../services/api';
 import Dropzone from 'react-dropzone';
-
+import { useHistory } from 'react-router-dom';
 import Header from '../../components/Header';
 
 import { FiUpload } from 'react-icons/fi';
@@ -12,6 +12,8 @@ const EditProfile: React.FC = () => {
     const [selectedFileUrl, setSelectedFileUrl] = useState('');
     const [name, setName] = useState<string>('');
     const [password, setPass] = useState<string>('');
+
+    const history = useHistory();
 
     async function handleSubmit(e: MouseEvent<HTMLButtonElement>) {
       e.preventDefault();
@@ -31,7 +33,9 @@ const EditProfile: React.FC = () => {
           return;
 
         }
-        alert('Dados atualizados')
+        alert('Dados atualizados');
+        
+        history.push(`/catch/${sessionStorage.getItem('id_trainer')}`)
 
       } catch(err) {}
 

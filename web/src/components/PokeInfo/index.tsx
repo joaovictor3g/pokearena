@@ -76,7 +76,9 @@ const PokeInfo: React.FC<Props> = ({ pokedexNumber, name, setDescription, onClos
                 return;
             }
 
-        alert('Capturado');
+            alert('Capturado');
+            onClose();
+
         } catch(err) {
 
         }

@@ -44,9 +44,12 @@
 }
 
 .your-pokemons-content .content-pokemons .description {
+    margin-top: 20px;
+    width: 100%;
     text-align: justify;
     font-weight: bold;
     font-family: Ubuntu;
+
 }
 
 .trash-and-id {
