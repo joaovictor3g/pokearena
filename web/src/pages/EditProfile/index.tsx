@@ -39,7 +39,7 @@ const EditProfile: React.FC = () => {
 
     return (
       <>
-      <Header title="Edite suas informações" id_trainer={Number(sessionStorage.getItem('id_trainer'))}/>
+      <Header title="Edite seu avatar" id_trainer={Number(sessionStorage.getItem('id_trainer'))}/>
       <div className="edit-profile">
         <form className="form-data">
         <Dropzone onDrop={
@@ -71,10 +71,11 @@ const EditProfile: React.FC = () => {
                     </section>
                 )}
             </Dropzone>
-          <input className="name" onChange={e=>setName(e.target.value)} value={name}/>
+          {/*<input className="name" onChange={e=>setName(e.target.value)} value={name}/>
           <input className="past-password" type="password" onChange={e=>setPass(e.target.value)} value={password}/> 
           <input className="new-password" type="password"/>
           <input className="new-password" type="password"/>
+                      */}
           <button className="save-button" type="button" onClick={handleSubmit}>Salvar</button>
         </form>
       </div>

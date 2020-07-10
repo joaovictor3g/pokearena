@@ -11,7 +11,7 @@ import api from '../../services/api';
 
 interface ImageProp {
   image: string, 
-  name: string
+ 
 }
 
 const Logged = () => {
@@ -35,14 +35,9 @@ const Logged = () => {
     useEffect(() => {
       const id = sessionStorage.getItem('id_trainer');
 
-      console.log(id)
-
       async function getAllInfos() {
         try { 
             const res = await api.get(`/get-all-infos/${id}`);
-
-            if(image_profile?.name)
-              sessionStorage.setItem('name', image_profile?.name)
 
             if(res.data[0]) {
               setImage(res.data[0]);
@@ -54,7 +49,7 @@ const Logged = () => {
 
       getAllInfos();
       
-    }, [image_profile])
+    }, [])
 
     async function getResponsePokemon(offset=0) {
         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=5`);
@@ -102,11 +97,12 @@ const Logged = () => {
             { !pokemons ? <p>Carregando.....</p> : (
                 <>
                   <header className="header">
-                    Capture seus pokemons, {image_profile?.name}
-                    <div className="link-and-image-back">
-                      <Link to={`/edit-profile/${sessionStorage.getItem('id_trainer')}`}>
+                  <Link to={`/edit-profile/${sessionStorage.getItem('id_trainer')}`}>
                         <img src={image_profile?.image ? `http://192.168.0.106:3333/uploads/${image_profile?.image}` : ImageProfile} alt="profile"/>
                       </Link>
+                    Capture seus pokemons
+                    <div className="link-and-image-back">
+                      
                       <button type="button" onClick={e=>{ 
                         e.preventDefault()
                         sessionStorage.clear(); 
