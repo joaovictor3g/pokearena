@@ -20,60 +20,41 @@ const addAbility = {
 
         const response = await api.get(`/pokemon/${id_pokemon}`);
 
-        const abilities = response.data.abilities;
-
-        const names = abilities
-            .map((ability: { ability: { name: string } }) => (ability.ability.name));
-
-        const urls: string[] = abilities
-            .map((ability: { ability: { url: string } }) => (ability.ability.url)); 
-        
-        // Criação de uma transaction afim de evitar que se uma inserção dê errado ele não insira no proximo.
-        const trx = await connection.transaction();
-
-        const validate = await trx('ability').select('id_ability');
-
-        const validatePokemon = await trx('pokemon_abilities').select('id_pokemon');
-
-        const result = validate.map((validate: { id_ability: number }) => (validate.id_ability));
-
-        const resultPokemon = validatePokemon.map((validate: { id_pokemon: any }) => (validate.id_pokemon));
-
-        let cont = 0;
-
-        urls.map(async(url: string, idx: number) => {
-            const response = await axios.get(url);
-            
-            const effect = response.data.effect_entries[1].effect;
-
-            const id_ability = response.data.id;
-
-            cont++;
-
-            try { 
-                if(!result.includes(id_ability)) {
-                    await trx('ability').insert({ id_ability, name: names[idx], effect });
-                    //await trx.commit();
-                }
-
-                if(result[idx]===id_ability && resultPokemon[idx]===id_pokemon) {
-                    await trx('pokemon_abilities')
-                        .insert({ id_pokemon, id_ability });
-
-                }
-
-                await trx.commit();
-                
-            } catch(err) {
-                console.log('Deu erro');
-                //await trx.rollback();
-            }
-
+        const getAbilities = response.data.abilities.map((ability: { ability: { name: string, url: string }}) => { 
+            return {
+                name: ability.ability.name,
+                url: ability.ability.url
+            } 
         });
 
-        //await trx.commit();
+        const trx = await connection.transaction();
 
-        return res.json({ message: 'Ability added' })
+        const isAlreadyExists = await connection('ability').select('name');
+
+        const result = isAlreadyExists.map((ability: { name: string }) => ability.name);
+
+        console.log(result)
+
+        getAbilities.map(async(ability: { name: string, url: string }, idx: number) => {
+            const res = await axios.get(ability.url);
+
+            const effect = res.data.effect_entries[1].effect;
+            const id = res.data.id;
+
+            try {
+                if(!result.includes(ability.name)) {
+                    await trx('ability').insert({ name: ability.name, effect, id_ability: id })
+                    
+                }
+                await trx('pokemon_abilities').insert({ id_pokemon, id_ability: id })
+                await trx.commit();
+
+            } catch(err) {
+                console.log('erro', err);
+            }
+        })
+
+        return res.json({ message: 'deu certo' })
     },  
 };
 

@@ -41,6 +41,7 @@ const trainerController = {
             .whereIn('pokemon.id_pokemon', result)
             .where('nickname_pokemon.id_trainer', id)
             .select('nickname_pokemon.nickname', 'pokemon.*')
+            .orderBy('id_pokemon')
             .distinct();
           
     
@@ -77,7 +78,6 @@ const trainerController = {
 
     async addImageProfile(req: Request, res: Response) {
         const { id } = req.params;
-        const { password } = req.body;
 
         const trx = await connection.transaction();
 
@@ -86,20 +86,16 @@ const trainerController = {
         const result = response.map((id_trainer: {id_trainer: number})=>id_trainer.id_trainer);
 
         if(!result.includes(Number(id))) {
-            await trx('trainer_image').insert({ id_trainer: id, image: req.file.filename });
+            await connection('trainer_image').insert({ id_trainer: id, image: req.file.filename });
 
             return res.json({ message: 'Alright' })
         }
 
-        await trx('trainer')
-            .update('password', password)
-            .where('id_trainer', id);
-
-        await trx('trainer_image')
+        await connection('trainer_image')
             .update('image', req.file.filename)
             .where('id_trainer', id);
             
-        await trx.commit();
+        //await trx.commit();
 
         return res.json({ message: 'Updated' })
     },
