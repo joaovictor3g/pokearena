@@ -71,7 +71,7 @@ const Login = () => {
                         type={changeEye ? 'text' : 'password'}
                     />
                     <button onClick={handleClickVisibleButton}>
-                        {changeEye ? <FaEye /> : <FaEyeSlash />}
+                        {changeEye ? <FaEyeSlash /> : <FaEye />}
                     </button>
                 </div>
                 <Link to="/sign-up" className="sign-up">
@@ -82,13 +82,7 @@ const Login = () => {
                 <button type="button" className="button" onClick={login}>
                     Login
                 </button>
-
-                <button onClick={(e) => {
-                    e.preventDefault();
-                    setPasswordModalVisible(true);
-                }}>
-                        Esqueceu a senha?
-                </button>
+                
                 {isNewPasswordModalVisible ? <ModalForgotPassword onClose={()=>setPasswordModalVisible(false)}/>: null} 
                 
             </form>
