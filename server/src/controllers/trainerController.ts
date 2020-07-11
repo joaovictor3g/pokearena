@@ -49,8 +49,6 @@ const trainerController = {
     },
 
     async deletePokemon(req: Request, res: Response) {
-        //const { id_trainer } = req.params;
-        //const { id_pokemon } = req.body;
         const { id_trainer, id_pokemon } = req.query;
         
         const idTrainer = Number(id_trainer);
@@ -110,7 +108,25 @@ const trainerController = {
             .distinct();
         
         return res.json(response)
-    }
+    },
+
+    async returnAllTrainers(req: Request, res: Response) {
+        const ids = await connection('trainer').select('id_trainer');
+
+        const resultId = ids.map((id_trainer: { id_trainer: number })=>id_trainer.id_trainer);
+
+        console.log(resultId);
+
+        const trainers = await  connection('trainer')
+            .join('trainer_image', 'trainer_image.id_trainer', 'trainer.id_trainer')
+            .whereIn('trainer.id_trainer', resultId)
+            .select('trainer.id_trainer', 'trainer.name', 'trainer_image.image')
+            .orderBy('trainer.id_trainer');
+
+        return res.json(trainers);
+    },
+
+    
 }; 
 
 export default trainerController;
