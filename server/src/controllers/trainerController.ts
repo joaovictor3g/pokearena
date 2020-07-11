@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import connection from '../database/connection';
 
 const trainerController = {
+    // Cria um novo treinador
     async create(req: Request, res: Response) {
         const { name, password } = req.body;
 
@@ -11,6 +12,7 @@ const trainerController = {
         return res.json({ message: 'Trainer reached ten years' });
     },
 
+    // Verifica se o treinador existe na base de dados
     async signIn(req: Request, res: Response) {
         const { name, password } = req.body;
 
@@ -22,6 +24,7 @@ const trainerController = {
         return res.json(id);
     },
 
+    // Mostra os pokemons que o treinador capturou
     async show(req: Request, res: Response) {
         const { id } = req.params;
 
@@ -32,10 +35,6 @@ const trainerController = {
 
         const result = idPokemon.map(id => id.id_pokemon);
 
-        /*const infoPokemon = await connection('pokemon')
-            .select('*')
-            .whereIn('pokemon.id_pokemon', result)
-            .distinct();*/
         const infoPokemon = await connection('pokemon')
             .join('nickname_pokemon', 'nickname_pokemon.id_pokemon', 'pokemon.id_pokemon')
             .whereIn('pokemon.id_pokemon', result)
@@ -48,6 +47,7 @@ const trainerController = {
         return res.json(infoPokemon);
     },
 
+    // Deleta um pokemon do treinador
     async deletePokemon(req: Request, res: Response) {
         const { id_trainer, id_pokemon } = req.query;
         
@@ -62,6 +62,7 @@ const trainerController = {
         return res.json({ message: 'Pokemon deleted' })
     },
 
+    // Atualiza senha de acesso do treinador (sem interface)
     async updatePassword(req: Request, res: Response) {
         const { id_trainer, name, password } = req.body;
 
@@ -74,6 +75,7 @@ const trainerController = {
     
     },
 
+    // Adiciona uma imagem de avatar para o treinador
     async addImageProfile(req: Request, res: Response) {
         const { id } = req.params;
 
@@ -98,6 +100,7 @@ const trainerController = {
         return res.json({ message: 'Updated' })
     },
 
+    // Retorna imagem e nome do treinador
     async getAllInfos(req: Request, res: Response) {
         const { id } = req.params;
 
@@ -110,6 +113,7 @@ const trainerController = {
         return res.json(response)
     },
 
+    // Retorna todos os treinadores criados
     async returnAllTrainers(req: Request, res: Response) {
         const ids = await connection('trainer').select('id_trainer');
 
