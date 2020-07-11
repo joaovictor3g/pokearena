@@ -86,15 +86,6 @@ const PokeInfo: React.FC<Props> = ({ pokedexNumber, name, setDescription, onClos
         
     }
 
-    /*useEffect(() => {
-        // eslint-disable-next-line array-callback-return
-        urlType.map((url: string) => {
-            axios.get(url).then(res => {
-                setNumberType(res.data.id);
-            })
-        })
-    }, [numberType, urlType]);*/
-
     return (
         <div className="container-modal">
             <div className="name-and-cancel-container">

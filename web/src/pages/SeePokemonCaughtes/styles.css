@@ -9,6 +9,8 @@
 
     width: 100%;
 
+    overflow-x: auto;
+
 }
 
 .your-pokemons-content .content-pokemons {
