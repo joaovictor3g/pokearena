@@ -43,14 +43,15 @@ const addAbility = {
 
             try {
                 if(!result.includes(ability.name)) {
-                    await trx('ability').insert({ name: ability.name, effect, id_ability: id })
+                    await trx('ability').insert({ name: ability.name, effect, id_ability: id });
                     
                 }
-                await trx('pokemon_abilities').insert({ id_pokemon, id_ability: id })
+                await trx('pokemon_abilities').insert({ id_pokemon, id_ability: id });
+
                 await trx.commit();
 
             } catch(err) {
-                console.log('erro', err);
+                console.log('deu erro');
             }
         })
 

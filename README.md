@@ -45,7 +45,7 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
 ### Como rodar?
 - Clone este repositório: `git clone https://github.com/joaovictor3g/game-pokearena`
 - cd game-pokearena
-- Criar database Pokemon, em qualquer ferramenta de gerenciamento de banco (PgAdmin4, Postico...).
+- Criar database Pokemon, em qualquer ferramenta de gerenciamento para postgresql (PgAdmin4, Postico...).
 - rode `yarn` para instalar todas as dependências, caso não temha yarn, pode usar `npm install` para instalá-las.
 - cd server && run `yarn knex:migrate` ou `npm run knex:migrate` para rodar as migrations.
 - Rode `yarn knex:rollback` caso queira excluir todas as tabelas do banco.
@@ -53,25 +53,11 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
 
 Crie esta trigger:
 ```SQL
-CREATE OR REPLACE FUNCTION add_modifications()
-RETURNS TRIGGER AS $$ 
-	BEGIN 
-		IF(TG_OP='INSERT') THEN
-			INSERT INTO changelog(description) 
-            		VALUES('Treinador com id: ' || NEW.id_trainer || ' capturou pokemon com id: '|| NEW.id_pokemon);
-            		RETURN NEW;
-		END IF;
-		IF(TG_OP='DELETE') THEN
-			INSERT INTO changelog(description) 
-            		VALUES('Treinador com id: ' || NEW.id_trainer || ' deletou pokemon com id: ' || NEW.id_pokemon);
-            		RETURN NEW;
-		END IF;
-	END; 
-$$ LANGUAGE plpgsql;
+ 
 
 
 CREATE TRIGGER modifications
-	AFTER INSERT OR DELETE ON pokemon_trainer
+	AFTER INSERT ON pokemon_trainer
 	FOR EACH ROW
 	EXECUTE PROCEDURE add_modifications();
 ```

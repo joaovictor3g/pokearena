@@ -6,7 +6,7 @@ import { FaEdit } from 'react-icons/fa';
 import Header from '../../components/Header';
 import DeletePokemon from '../../components/DeletePokemon';
 import ModalUpdatePokemon from '../../components/ModalUpdatePokemon';
-import Alert from '../../components/Alert';
+// import Alert from '../../components/Alert';
 
 import './styles.css';
 

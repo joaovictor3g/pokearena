@@ -70,7 +70,7 @@ const Login = () => {
                         onChange={e=>setPass(e.target.value)}
                         type={changeEye ? 'text' : 'password'}
                     />
-                    <button onClick={handleClickVisibleButton}>
+                    <button onClick={handleClickVisibleButton} className="eye-button">
                         {changeEye ? <FaEyeSlash /> : <FaEye />}
                     </button>
                 </div>

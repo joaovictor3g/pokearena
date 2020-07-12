@@ -6,18 +6,21 @@ import './styles.css';
 interface HeaderProps {
     title: string,
     onAction?: () => void,
-    id_trainer?: number
+    id_trainer?: number, 
+    image?: string
 } 
 
 const Header: React.FC<HeaderProps> = ({ title, id_trainer }) => {
   return (
         <header className="header-content">
-            <Link to={`/catch/${id_trainer}`}>
-                <FiArrowLeft size={25} color="#FFF"/>
-            </Link>
+            <div className="back-and-image-content">
+                <Link to={`/catch/${id_trainer}`}>
+                    <FiArrowLeft size={25} color="#FFF"/>
+                </Link>
+            </div>
             <p className="title">{title}</p>
             <Link onClick={()=>{sessionStorage.clear()}} to="/" className="go-home-button" >
-                <FiPower size={25} color="#FFF"/>    
+                <FiPower size={28} color="crimson"/>    
             </Link>
         </header>
     

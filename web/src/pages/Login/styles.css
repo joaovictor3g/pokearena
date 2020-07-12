@@ -34,7 +34,7 @@
 
 .container .form-content .button {
     width: 100%;
-    margin-top: 10px;
+    margin-top: 70px;
     border-radius: 8px;
     height: 50px;
     font-weight: bold;
@@ -54,7 +54,7 @@
     
 }
 
-.input-and-symbol button {
+.input-and-symbol .eye-button {
     background: transparent;
     border: 0;
 }
@@ -90,3 +90,4 @@
     text-decoration: none;
     font-size: 16px;
 }
+
