@@ -5,7 +5,7 @@ export async function up(knex: Knex) {
         table.integer('id_pokemon').primary().notNullable();
         table.string('name').notNullable();
         table.string('image').notNullable();
-        table.string('description').notNullable();
+        table.string('description', 10000).notNullable();
     });
 }
 
