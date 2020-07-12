@@ -58,13 +58,13 @@ RETURNS TRIGGER AS $$
 	BEGIN 
 		IF(TG_OP='INSERT') THEN
 			INSERT INTO changelog(description) 
-            VALUES ('Treinador com id: ' || NEW.id_trainer || ' capturou pokemon com id: '|| NEW.id_pokemon);
-            RETURN NEW;
+            		VALUES ('Treinador com id: ' || NEW.id_trainer || ' capturou pokemon com id: '|| NEW.id_pokemon);
+            		RETURN NEW;
 		END IF;
 		IF(TG_OP='DELETE') THEN
 			INSERT INTO changelog(description) 
-            VALUES ('Treinador com id: ' || NEW.id_trainer || ' deletou pokemon com id: ' || NEW.id_pokemon);
-            RETURN NEW;
+            		VALUES ('Treinador com id: ' || NEW.id_trainer || ' deletou pokemon com id: ' || NEW.id_pokemon);
+            		RETURN NEW;
 		END IF;
 	END; 
 $$ LANGUAGE plpgsql;
