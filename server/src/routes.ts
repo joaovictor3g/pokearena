@@ -7,6 +7,7 @@ import trainerController from './controllers/trainerController';
 import addPokemonToTrainer from './controllers/addPokemonToTrainer';
 import addAbility from './controllers/addAbility';
 import typeController from './controllers/typeController';
+import logController from './controllers/logController';
 
 const routes = Router();
 const upload = multer(multerConfig);
@@ -34,5 +35,7 @@ routes.get('/see-infos/:id_pokemon', addAbility.create);
 routes.get('/see-pokemon-infos/:id_pokemon', addAbility.index);
 
 routes.get('/add-types/:id_pokemon', typeController.create);
+
+routes.get('/changelog', logController.index);
 
 export default routes;
