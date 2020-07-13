@@ -49,8 +49,6 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
 - rode `yarn` para instalar todas as dependências, caso não tenha yarn, pode usar `npm install` para instalá-las.
 - cd server && run `yarn knex:migrate` ou `npm run knex:migrate` para rodar as migrations.
 - Rode `yarn knex:rollback` caso queira excluir todas as tabelas do banco.
-- Após isto no mesmo diretório rode `yarn dev` ou `npm run dev`, para executar o backend da aplicação em modo de desenvolvimento. Com isso sua aplicação estará rodando no seguinte endereço: `http://localhost:3333`. Caso seja necessário testar as rotas do backend pode ser usado um software chamado Imsomnia.
-
 - Criar esta trigger, para que ao um treinador capturar um pokemon, seja registrado numa tabela chamada changelog:
     ```SQL
     CREATE OR REPLACE FUNCTION add_modifications()
@@ -72,6 +70,9 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
     ```
 
 - Após a criação desta trigger rodar `yarn knex:seed` ou `npm run knex:seed`, para que os registros na tabela chanfelog sejam feitos e um treinador e pokemon sejam criados.
+
+
+- Após isto no mesmo diretório rode `yarn dev` ou `npm run dev`, para executar o backend da aplicação em modo de desenvolvimento. Com isso sua aplicação estará rodando no seguinte endereço: `http://localhost:3333`. Caso seja necessário testar as rotas do backend pode ser usado um software chamado Imsomnia.
 
 ### Rotas (backend)
 
