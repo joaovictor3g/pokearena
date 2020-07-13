@@ -16,12 +16,30 @@ const trainerController = {
     async signIn(req: Request, res: Response) {
         const { name, password } = req.body;
 
-        const [id] = await connection('trainer')
+        const trx = await connection.transaction();
+
+        const [id] = await trx('trainer')
             .select('id_trainer')
             .where('name', name)
             .where('password', password);
+    
+        await trx('trainer')
+         .update('is_online', true)
+         .where('id_trainer', Number(id.id_trainer)) 
         
+        await trx.commit();
+
         return res.json(id);
+    },
+
+    async exit(req: Request, res: Response) {
+        const { id } = req.params;
+
+        await connection('trainer')
+            .update('is_online', false)
+            .where('id_trainer', id);
+        
+        return res.json({ message: 'exited with success' })
     },
 
     // Mostra os pokemons que o treinador capturou

@@ -5,6 +5,7 @@ export async function up(knex: Knex) {
         table.increments('id_trainer').primary().notNullable();
         table.string('name').notNullable();
         table.string('password').notNullable();
+        table.boolean('is_online');
     });
 }
 

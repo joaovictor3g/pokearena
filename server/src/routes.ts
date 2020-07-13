@@ -25,6 +25,7 @@ routes.delete('/delete', trainerController.deletePokemon);
 routes.put('/forgot-password', trainerController.updatePassword);
 routes.get('/get-all-infos/:id', trainerController.getAllInfos);
 routes.get('/get-all-trainers', trainerController.returnAllTrainers);
+routes.get('/exit/:id', trainerController.exit);
 
 // Add Pokemon to trainer route
 routes.post('/catch/:id', addPokemonToTrainer.create);
