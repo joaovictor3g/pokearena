@@ -106,7 +106,8 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
     ```
 - Claro que estas informações estão salvas no banco de dados, o que está sendo executado por trás é:
     ```SQL
-    SELECT pok.* FROM pokemon pok INNER JOIN pokemon_trainer ptr ON ptr.id_pokemon=pok.id_pokemon INNER JOIN trainer tr ON  ptr.id_trainer=1
+    SELECT pok.* FROM pokemon pok INNER JOIN pokemon_trainer ptr ON ptr.id_pokemon=pok.id_pokemon 
+    INNER JOIN trainer tr ON  ptr.id_trainer=1
     ```
 
 - Visualizando no PgAdmin como tabela:
