@@ -71,14 +71,24 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
     	EXECUTE PROCEDURE add_modifications();
     ```
 
-- Após a criação desta trigger rodar `yarn knex:seed` ou `npm run knex:seed`, para que os registros na tabela chanfelog sejam feitos.
+- Após a criação desta trigger rodar `yarn knex:seed` ou `npm run knex:seed`, para que os registros na tabela chanfelog sejam feitos e um treinador e pokemon sejam criados.
 
 ### Rotas (backend)
 
-- Rota que mostra os logs de captura de pokemon.
-`http://localhost:3333/changelog`
+- Rota que mostra os logs de captura de pokemon. `http://localhost:3333/changelog`
+
 
     [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=See%20Changelog&uri=http%3A%2F%2Flocalhost%3A3333%2Fchangelog)
+
+- Resultado (exemplo):
+    ```JSON
+    [
+      {
+        "id": 1,
+        "description": "Treinador com id: 1 capturou pokemon com id: 1"
+      }
+    ]
+    ```
 
 - Rota de visualizar todos os pokemons de um unico treinador, no caso treinador com id=1: `http://localhost:3333/see-your-pokemons/1`
 
