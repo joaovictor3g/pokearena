@@ -106,7 +106,8 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
     ```
 - Claro que estas informações estão salvas no banco de dados, o que está sendo executado por trás é:
     ```SQL
-    SELECT pok.* FROM pokemon pok INNER JOIN pokemon_trainer ptr ON ptr.id_pokemon=pok.id_pokemon INNER JOIN trainer tr ON  ptr.id_trainer=1
+    SELECT pok.* FROM pokemon pok INNER JOIN pokemon_trainer ptr ON ptr.id_pokemon=pok.id_pokemon 
+    INNER JOIN trainer tr ON  ptr.id_trainer=1
     ```
 - Caso deseje testar a rota.
     [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Get%20All%20Pokemons%20From%20a%20Trainer&uri=http%3A%2F%2Flocalhost%3A3333%2Fsee-your-pokemons%2F1)
