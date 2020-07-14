@@ -2,7 +2,6 @@ import React, { useState, useEffect, Dispatch, SetStateAction, MouseEvent } from
 import { MdCancel } from 'react-icons/md';
 import axios from 'axios';
 import './styles.css';
-import { type } from 'os';
 import api from '../../services/api';
 
 interface Props {

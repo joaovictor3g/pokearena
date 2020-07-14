@@ -46,6 +46,8 @@ const ViewAllTrainers: React.FC = () => {
     }
 
     return (
+        <>
+        <header className="title-header">Veja todos os treinadores que estão On e Offline no momento</header>
         <div className="principal-content">
             {trainersOn.map((trainerOn) => (
                 <div className="trainer-container trainer-on" key={trainerOn.id_trainer}>
@@ -60,7 +62,7 @@ const ViewAllTrainers: React.FC = () => {
                         </button>
                         <IoMdRadioButtonOn size={25} color="green" />
                     </div>
-                    {isModalVisible ? <TrainerInfo name={name} id_trainer={idTrainer}  is_online={isOnline}/>: null} 
+                    {isModalVisible ? <TrainerInfo onClose={() => setModalVisible(false)} name={name} id_trainer={idTrainer}  is_online={isOnline}/>: null} 
                 </div>
                
             ))}
@@ -78,11 +80,11 @@ const ViewAllTrainers: React.FC = () => {
                         </button>
                         <IoMdRadioButtonOn size={25} color="red" />
                     </div>
-                    {isModalVisible ? <TrainerInfo name={name} id_trainer={idTrainer}  is_online={isOnline}/>: null}
+                    {isModalVisible ? <TrainerInfo onClose={() => setModalVisible(false)} name={name} id_trainer={idTrainer}  is_online={isOnline}/>: null}
                 </div>
             ))}
         </div>
-
+        </>
     );
 }
 

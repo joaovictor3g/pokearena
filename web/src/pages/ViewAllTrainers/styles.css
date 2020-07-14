@@ -1,12 +1,24 @@
+.title-header {
+    background: #000;
+
+    color: #FFF;
+    text-align: center;
+    padding: 30px;
+
+    font-family: Ubuntu;
+    font-size: 30px;
+}
 .principal-content {
     margin: 30px auto;
     padding: 30px;
+    
 }
 
 .principal-content .trainer-container {
     background: #FFF;
+    
+    margin: auto;
     margin-bottom: 20px;
-
     border-radius: 5px;
     padding: 20px;
 
@@ -14,6 +26,7 @@
     justify-content: space-between;
 
     align-items: center;
+    width: 50%;
     
 }
 

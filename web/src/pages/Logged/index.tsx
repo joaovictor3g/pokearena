@@ -92,6 +92,19 @@ const Logged = () => {
       setPokemonName(name)
     }
 
+    async function handleExit(e: MouseEvent<HTMLButtonElement>) {
+        e.preventDefault();
+
+        try { 
+          await api.get(`/exit/${sessionStorage.getItem('id_trainer')}`)
+        } catch (err) {}
+        
+
+        sessionStorage.clear(); 
+
+        history.push('/');
+    }
+
     return (
         <>   
             { !pokemons ? <p>Carregando.....</p> : (
@@ -103,11 +116,7 @@ const Logged = () => {
                     Capture seus pokemons
                     <div className="link-and-image-back">
                       
-                      <button type="button" onClick={e=>{ 
-                        e.preventDefault()
-                        sessionStorage.clear(); 
-                        history.push('/');
-                        }} className="link">
+                      <button type="button" onClick={handleExit} className="link">
                         <FiPower size={32} color="#FFF"/>
                       
                       </button>
