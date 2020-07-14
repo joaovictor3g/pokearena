@@ -56,7 +56,8 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
     	BEGIN 
     	  IF(TG_OP='INSERT') THEN
     	    INSERT INTO changelog(description) 
-                VALUES('Treinador com id: ' || NEW.id_trainer || ' capturou pokemon com id: '|| NEW.id_pokemon);
+                VALUES('Treinador com id: ' || NEW.id_trainer 
+                || ' capturou pokemon com id: '|| NEW.id_pokemon);
                 RETURN NEW;
     	 END IF;
            END; 
