@@ -7,6 +7,7 @@ import NewTrainer from './pages/NewTrainer';
 import SeePokemonCaughtes from './pages/SeePokemonCaughtes';
 import EditProile from './pages/EditProfile';
 import ListTrainers from './pages/ListTrainers';
+import ViewAllTrainers from './pages/ViewAllTrainers';
 
 export default function Routes() {
     return (
@@ -18,6 +19,7 @@ export default function Routes() {
                 <Route path="/see-your-pokemons/:id" component={SeePokemonCaughtes} />
                 <Route path="/edit-profile/:id" component={EditProile} />
                 <Route path="/list-all-trainers" component={ListTrainers} />
+                <Route path="/view-trainers-on" component={ViewAllTrainers} />
             </Switch>
         </BrowserRouter>
     )
