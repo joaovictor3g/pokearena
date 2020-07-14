@@ -43,8 +43,8 @@ A aplicação consiste em um CRUD de pokemon, ou seja você consegue criar um tr
 Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-pokearena/master/assets/modelagem.svg)
 
 ### Como rodar?
-- Clone este repositório: `git clone https://github.com/joaovictor3g/game-pokearena`
-- cd game-pokearena
+- Clone este repositório: `git clone https://github.com/joaovictor3g/pokearena`
+- cd pokearena
 - Criar database Pokemon, em qualquer ferramenta de gerenciamento para postgresql (PgAdmin4, Postico...).
 - rode `yarn` para instalar todas as dependências, caso não tenha yarn, pode usar `npm install` para instalá-las.
 - cd server && run `yarn knex:migrate` ou `npm run knex:migrate` para rodar as migrations.
