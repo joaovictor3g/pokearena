@@ -187,3 +187,13 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
     <img src="assets/7.png">
     <img src="assets/8.png">
     <img src="assets/9.png">
+
+- __Página 6:__ Tela que mostra todos os treinadores que estão online e offline: 
+<img src="assets/14.png">
+
+    - Modal de visualização dos pokemons dos treinadores online, clicando no i azul:
+
+    <img src="assets/15.png">
+    
+    - Quando a flag `is_online` que é um atributo do treinador está `false` é identificado como offline, por isso a borda vermelha, se estivesse on-line estaria verde, como segue, assim que o usuario loga é feita um `update` e o atributo é setado para `true`: 
+    <img src="assets/16.png">
