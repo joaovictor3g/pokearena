@@ -152,7 +152,7 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
             "password": "1234"
         }
     ```
-- Com isso esse usuário é cadastrado na base de dados.
+- Com isso esse usuário é cadastrado na base de dados. Não passo três parâmetros, pois o backend só está esperando um campo name e password, por isso a responsabilidade de identificar se as senhas são iguais fica com o frontend e a de verificar se as informações constam no banco fica para o backend. 
 
 <img src="assets/tabelaTrainer.png">
 
