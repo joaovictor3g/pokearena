@@ -29,7 +29,7 @@ const addAbility = {
 
         const trx = await connection.transaction();
 
-        const isAlreadyExists = await connection('ability').select('name');
+        const isAlreadyExists = await trx('ability').select('name');
 
         const result = isAlreadyExists.map((ability: { name: string }) => ability.name);
 
@@ -38,11 +38,12 @@ const addAbility = {
 
             if(!result.includes(ability.name)) {
                 await trx('ability').insert({ name: ability.name, effect: res.data.effect_entries[1].effect, id_ability: res.data.id });
-                
-            }
-            await trx('pokemon_abilities').insert({ id_pokemon, id_ability: res.data.id });
 
+            }
+            await trx('pokemon_abilities').insert({ id_pokemon, id_ability: res.data.id }); 
+            
             await trx.commit();
+           
         })
 
         return res.json({ message: 'deu certo' })

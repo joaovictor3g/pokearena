@@ -5,7 +5,7 @@ export async function up(knex: Knex) {
         table.integer('id_pokemon').notNullable();
         table.integer('id_type').notNullable();
         table.foreign('id_pokemon').references('id_pokemon').inTable('pokemon');
-        table.foreign('id_type').references('id_type').inTable('type');
+        table.foreign('id_type').references('id_type').inTable('typing');
     });
 }
 
