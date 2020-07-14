@@ -152,7 +152,7 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
             "password": "1234"
         }
     ```
-- Aqui só passo dois porque o frontend fica encarregado de verificar se as senhas são iguais. O backend fica com a responsabilidade de verificar, quando o usuário logar com esses dados, de verificar se, essas informações constam no banco, se sim o usuário navega para próxima página, se não um `alert` é exibido dizendo que o usuário ou senha estão errados.  
+- Aqui só passo dois porque o frontend fica encarregado de verificar se as senhas são iguais. O backend fica com a responsabilidade de, quando o usuário logar com esses dados, de verificar se, essas informações constam no banco, se sim o usuário navega para próxima página, se não um `alert` é exibido dizendo que o usuário ou senha estão errados.  
  
 - Com isso esse usuário é cadastrado na base de dados.
 
