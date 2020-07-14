@@ -152,7 +152,9 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
             "password": "1234"
         }
     ```
-- Com isso esse usuário é cadastrado na base de dados.
+- Aqui só passo dois porque o frontend fica encarregado de verificar se as senhas são iguais. O backend fica com a responsabilidade de, quando o usuário logar com esses dados, de verificar se, essas informações constam no banco, se sim o usuário navega para próxima página, se não um `alert` é exibido dizendo que o usuário ou senha estão errados.  
+ 
+- Com isso esse usuário é cadastrado na base de dados. A senha está sendo salva no seu formato padrão, sem nenhuma criptografia.
 
 <img src="assets/tabelaTrainer.png">
 
@@ -166,7 +168,6 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
 - Modal pagina 3: Confirmação de captura:
 
 <img src="assets/10.png">
-
 - Ao clicar no botão confirmar captura este pokemon é salvo na base de dados, numa tabela que relaciona o treinador e pokemon: pokemon_trainer, que recebe o id do pokemon e o id do treinador.
 
 <img src="assets/11.png">
@@ -187,6 +188,7 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
     <img src="assets/7.png">
     <img src="assets/8.png">
     <img src="assets/9.png">
+<<<<<<< HEAD
 
 - __Página 6:__ Tela que mostra todos os treinadores que estão online e offline: 
 <img src="assets/14.png">
@@ -197,3 +199,5 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
     
     - Quando a flag `is_online` que é um atributo do treinador está `false` é identificado como offline, por isso a borda vermelha, se estivesse on-line estaria verde, como segue, assim que o usuario loga é feita um `update` e o atributo é setado para `true`: 
     <img src="assets/16.png">
+=======
+>>>>>>> cfb65efa1eaa81ddf3262966bbec2f8ac1c9a627
