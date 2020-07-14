@@ -134,3 +134,51 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
 - Com isso a aplicação estará rodando no endereço `http://localhost:3000`.
 - Tenha certeza que o backend foi iniciado, para que todas as funcionalidades, sejam habilitadas.
 
+### Layout
+
+- __Pagina 1__: Login
+<img src="assets/1.png" alt="1">
+- Como não há nenhum treinador cadastrado na base de dados é necessário criar um treinador.
+
+- __Página 2__: Criar treinador
+<img src="assets/2.png" alt="2">
+- Nessa tela é necessário preencher os três inputs. No caso eu preenchi da forma.
+    ```JSON
+        {
+            "name": "Ash",
+            "password": "1234"
+        }
+    ```
+- Com isso esse usuário é cadastrado na base de dados.
+<img src="assets/tabelaTrainer.png">
+
+- Voltando a pagina de login e preenchendo com estes dados.
+- __Pagina 3__: Treinador Logado.
+
+<img src="assets/4.png">
+
+- Nessa tela é possível capturar pokemons e relacioná-los a um único treinador.
+
+- Modal pagina 3: Confirmação de captura:
+
+<img src="assets/10.png">
+
+- Ao clicar no botão confirmar captura este pokemon é salvo na base de dados, numa tabela que relaciona o treinador e pokemon: pokemon_trainer, que recebe o id do pokemon e o id do treinador.
+
+<img src="assets/11.png">
+
+<img src="assets/12.png">
+
+- __Página 4:__ Visualizar pokemons capturados: Aqui é feita uma busca no banco, que retorna todos os pokemons que o usuário com id=1 tem.
+<img src="assets/13.png">
+
+    - Ainda nessa página é possível excluir um pokemon de um treinador e alterar o nome, só para este treinador.
+
+
+- __Página 5:__ Alterar avatar do treinador: é possível alterar a imagem do treinador, por upload de imagens:
+<img src="assets/5.png">
+    - Aqui se recebe uma imagem e esta é guardada no backend, só nome do arquivo é salvo no banco.
+    <img src="assets/6.png">
+    <img src="assets/7.png">
+    <img src="assets/8.png">
+    <img src="assets/9.png">

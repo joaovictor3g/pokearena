@@ -22,11 +22,12 @@ const trainerController = {
             .select('id_trainer')
             .where('name', name)
             .where('password', password);
-    
-        await trx('trainer')
-         .update('is_online', true)
-         .where('id_trainer', Number(id.id_trainer)) 
         
+        if(id) {
+            await trx('trainer')
+             .update('is_online', true)
+             .where('id_trainer', Number(id.id_trainer)) 
+        }
         await trx.commit();
 
         return res.json(id);
