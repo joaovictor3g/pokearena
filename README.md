@@ -166,7 +166,6 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
 - Modal pagina 3: Confirmação de captura:
 
 <img src="assets/10.png">
-
 - Ao clicar no botão confirmar captura este pokemon é salvo na base de dados, numa tabela que relaciona o treinador e pokemon: pokemon_trainer, que recebe o id do pokemon e o id do treinador.
 
 <img src="assets/11.png">
