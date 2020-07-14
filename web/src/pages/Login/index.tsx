@@ -79,6 +79,8 @@ const Login = () => {
                     <FiArrowRight />
                 </Link>
 
+               
+
                 <button type="button" className="button" onClick={login}>
                     Login
                 </button>
@@ -86,6 +88,13 @@ const Login = () => {
                 {isNewPasswordModalVisible ? <ModalForgotPassword onClose={()=>setPasswordModalVisible(false)}/>: null} 
                 
             </form>
+            <div className="link-to-view-all-trainers">
+                Ver treinadores?
+                <Link to="/view-trainers" className="sign-up">
+                    Ver treinadores já cadastrados
+                    
+                </Link>
+            </div>
               
         </div>
     );

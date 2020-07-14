@@ -33,26 +33,16 @@ const addAbility = {
 
         const result = isAlreadyExists.map((ability: { name: string }) => ability.name);
 
-        console.log(result)
-
         getAbilities.map(async(ability: { name: string, url: string }, idx: number) => {
             const res = await axios.get(ability.url);
 
-            const effect = res.data.effect_entries[1].effect;
-            const id = res.data.id;
-
-            try {
-                if(!result.includes(ability.name)) {
-                    await trx('ability').insert({ name: ability.name, effect, id_ability: id });
-                    
-                }
-                await trx('pokemon_abilities').insert({ id_pokemon, id_ability: id });
-
-                await trx.commit();
-
-            } catch(err) {
-                console.log('deu erro');
+            if(!result.includes(ability.name)) {
+                await trx('ability').insert({ name: ability.name, effect: res.data.effect_entries[1].effect, id_ability: res.data.id });
+                
             }
+            await trx('pokemon_abilities').insert({ id_pokemon, id_ability: res.data.id });
+
+            await trx.commit();
         })
 
         return res.json({ message: 'deu certo' })

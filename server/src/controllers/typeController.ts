@@ -9,43 +9,34 @@ const typeController = {
 
         const response = await api.get(`/pokemon/${id_pokemon}`);
 
-        const types = response.data.types.map((type: { type: { name: string } }) => type.type.name);
+        const getTypes = response.data.types.map((type: { type: { name: string, url: string }}) => { 
+            return {
+                name: type.type.name,
+                url: type.type.url
+            } 
+        });
 
-        const urls: string[] = response.data.types.map((type: { type: { url: string } }) => type.type.url);
+        //return res.json(getTypes);
 
         const trx = await connection.transaction();
 
-        const idTypeAlreadyExists = await trx('type').select('id_type');
+        const isAlreadyExists = await connection('type').select('name');
 
-        const idsType = idTypeAlreadyExists.map((id_type: { id_type: number }) => id_type.id_type);
+        const result = isAlreadyExists.map((type: { name: string }) => type.name);
 
-        const idPokemonAlreadyExists = await trx('pokemon_type').select('id_pokemon');
+        getTypes.map(async(type: { name: string, url: string }) => {
+            const res = await axios.get(type.url);
 
-        const idsPokemons = idPokemonAlreadyExists.map((idPoke: { id_pokemon: any}) => idPoke.id_pokemon)
-
-        urls.map(async(url: string, idx: number) => {
-            const urlResponse = await axios.get(url);
-
-            const id_type = urlResponse.data.id;  
-
-            console.log(id_type);
-
-            try {
-                if(!idsType.includes(id_type))
-                    await trx('type').insert({ id_type, name: types[idx] });
-
-                if( !idsPokemons.includes(id_pokemon+1000))
-                    await trx('pokemon_type').insert({ id_pokemon, id_type });
-
-                await trx.commit();
-
-            } catch(err) {
-                console.log('Deu erro');
+            if(!result.includes(type.name)) {
+                await trx('type').insert({ name: type.name, id_type: res.data.id });
+                
             }
-            
-        });
-        
-        return res.json({ message: 'type added' })
+            await trx('pokemon_type').insert({ id_pokemon, id_type: res.data.id });
+
+            await trx.commit();
+        })
+
+        return res.json({ message: 'deu certo' })
     },
 };
 
