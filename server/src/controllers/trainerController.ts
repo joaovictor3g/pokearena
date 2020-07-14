@@ -133,25 +133,18 @@ const trainerController = {
 
     // Retorna todos os treinadores criados
     async returnAllTrainers(req: Request, res: Response) {
-        const ids = await connection('trainer').select('id_trainer');
 
-        const resultId = ids.map((id_trainer: { id_trainer: number })=>id_trainer.id_trainer);
-
-        // const trainers = await  connection('trainer')
-        //     .join('trainer_image', 'trainer_image.id_trainer', 'trainer.id_trainer')
-        //     .whereIn('trainer.id_trainer', resultId)
-        //     .select('trainer.id_trainer', 'trainer.name', 'trainer_image.image')
-        //     .orderBy('trainer.id_trainer');
-
-        const trainers = await connection('trainer')
-            .select('*')
+        const trainersOnline = await connection('trainer')
+            .select('name', 'id_trainer', 'is_online')
             .where('is_online', true)
+            .orderBy('id_trainer');
+        
+        const trainersOffline = await connection('trainer')
+            .select('name', 'id_trainer', 'is_online')
+            .where('is_online', false)
+            .orderBy('id_trainer');
 
-        if(!trainers) {
-            return res.json({ message: 'Nenhum jogador ON' })
-        }
-
-        return res.json(trainers);
+        return res.json({ trainersOnline, trainersOffline });
     },
 
     

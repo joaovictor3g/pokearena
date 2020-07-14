@@ -1,0 +1,28 @@
+.principal-content {
+    margin: 30px auto;
+    padding: 30px;
+}
+
+.principal-content .trainer-container {
+    background: #FFF;
+    margin-bottom: 20px;
+
+    border-radius: 5px;
+    padding: 20px;
+
+    display: flex;
+    justify-content: space-between;
+
+    align-items: center;
+    
+}
+
+.principal-content .trainer-container .content {
+    font-size: 20px;
+    font-family: Ubuntu;
+}
+
+.info-button {
+    background: transparent;
+    border: 0;
+}
