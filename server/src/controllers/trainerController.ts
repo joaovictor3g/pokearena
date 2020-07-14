@@ -7,7 +7,7 @@ const trainerController = {
         const { name, password } = req.body;
 
         await connection('trainer')
-            .insert({ name, password });
+            .insert({ name, password, is_online: false });
         
         return res.json({ message: 'Trainer reached ten years' });
     },
@@ -137,13 +137,19 @@ const trainerController = {
 
         const resultId = ids.map((id_trainer: { id_trainer: number })=>id_trainer.id_trainer);
 
-        console.log(resultId);
+        // const trainers = await  connection('trainer')
+        //     .join('trainer_image', 'trainer_image.id_trainer', 'trainer.id_trainer')
+        //     .whereIn('trainer.id_trainer', resultId)
+        //     .select('trainer.id_trainer', 'trainer.name', 'trainer_image.image')
+        //     .orderBy('trainer.id_trainer');
 
-        const trainers = await  connection('trainer')
-            .join('trainer_image', 'trainer_image.id_trainer', 'trainer.id_trainer')
-            .whereIn('trainer.id_trainer', resultId)
-            .select('trainer.id_trainer', 'trainer.name', 'trainer_image.image')
-            .orderBy('trainer.id_trainer');
+        const trainers = await connection('trainer')
+            .select('*')
+            .where('is_online', true)
+
+        if(!trainers) {
+            return res.json({ message: 'Nenhum jogador ON' })
+        }
 
         return res.json(trainers);
     },
