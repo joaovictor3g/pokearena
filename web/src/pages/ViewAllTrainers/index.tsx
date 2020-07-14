@@ -20,6 +20,7 @@ const ViewAllTrainers: React.FC = () => {
 
     const [name, setName] = useState<string>('');
     const [idTrainer, setId] = useState<number>(0);
+    const [isOnline, setOnline] = useState<boolean>(false);
     
     useEffect(() => {
        api.get('/get-all-trainers')
@@ -30,10 +31,18 @@ const ViewAllTrainers: React.FC = () => {
         .catch(err => console.log(err));
     }, []);
 
-    function handlePassInfos(name: string, id: number) {
+    function handlePassInfosTrue(name: string, id: number) {
         setModalVisible(true)
         setName(name);
         setId(id);
+        setOnline(true)
+    }
+
+    function handlePassInfosFalse(name: string, id: number) {
+        setModalVisible(true)
+        setName(name);
+        setId(id);
+        setOnline(false)
     }
 
     return (
@@ -46,12 +55,12 @@ const ViewAllTrainers: React.FC = () => {
                         <span>Está online nesse momento</span>
                     </div>
                     <div>
-                        <button onClick={() => handlePassInfos(trainerOn.name, trainerOn.id_trainer)} className="info-button">
+                        <button onClick={() => handlePassInfosTrue(trainerOn.name, trainerOn.id_trainer)} className="info-button">
                             <FaInfoCircle size={25} color="blue" />
                         </button>
                         <IoMdRadioButtonOn size={25} color="green" />
                     </div>
-                    {isModalVisible ? <TrainerInfo name={name} id_trainer={idTrainer}  />: null} 
+                    {isModalVisible ? <TrainerInfo name={name} id_trainer={idTrainer}  is_online={isOnline}/>: null} 
                 </div>
                
             ))}
@@ -64,11 +73,12 @@ const ViewAllTrainers: React.FC = () => {
                         <span>Está offline nesse momento</span>
                     </div>
                     <div>
-                        <button onClick={() => setModalVisible(true) } className="info-button">
+                        <button onClick={() => handlePassInfosFalse(trainerOff.name, trainerOff.id_trainer) } className="info-button">
                             <FaInfoCircle size={25} color="blue" />
                         </button>
                         <IoMdRadioButtonOn size={25} color="red" />
                     </div>
+                    {isModalVisible ? <TrainerInfo name={name} id_trainer={idTrainer}  is_online={isOnline}/>: null}
                 </div>
             ))}
         </div>

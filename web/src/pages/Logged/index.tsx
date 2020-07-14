@@ -97,7 +97,7 @@ const Logged = () => {
             { !pokemons ? <p>Carregando.....</p> : (
                 <>
                   <header className="header">
-                  <Link to={`/edit-profile/${sessionStorage.getItem('id_trainer')}`}>
+                    <Link to={`/edit-profile/${sessionStorage.getItem('id_trainer')}`}>
                         <img src={image_profile?.image ? `http://192.168.0.106:3333/uploads/${image_profile?.image}` : ImageProfile} alt="profile"/>
                       </Link>
                     Capture seus pokemons

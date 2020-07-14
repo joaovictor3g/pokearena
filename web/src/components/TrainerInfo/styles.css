@@ -1,7 +1,7 @@
 .trainer-info-container-modal {
     text-align: center;
     width: 800px;
-    height: 200px;
+    height: 500px;
     font-weight: normal;
     margin-top: 100px;
  
@@ -16,8 +16,42 @@
     align-items: center;
 
     border: 1px solid #000;
+    border-radius: 5px;
 
     background: #FFF;
 
     margin: auto;
+}
+
+.trainer-info-container-modal img {
+    border-radius: 50%;
+}
+
+.trainer-info-container-modal .name {
+    font-size: 30px;
+    font-family: Ubuntu;
+    font-weight: bold;
+}
+
+.true .image-profile {
+    border: 5px solid green;
+}
+
+.false .image-profile {
+    border: 5px solid red;
+}
+
+.trainer-info-container-modal .pokemons-content {
+    
+}
+
+.trainer-info-container-modal .pokemons-content .listed-pokemons {
+    margin: 10px;
+
+    background: #DDD;
+    border-radius: 50%;
+}
+
+.trainer-info-container-modal .pokemons-content .title {
+    font-family: Ubuntu;
 }
