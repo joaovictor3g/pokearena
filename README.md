@@ -138,11 +138,14 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
 
 - __Pagina 1__: Login
 <img src="assets/1.png" alt="1">
+
 - Como não há nenhum treinador cadastrado na base de dados é necessário criar um treinador.
 
 - __Página 2__: Criar treinador
 <img src="assets/2.png" alt="2">
+
 - Nessa tela é necessário preencher os três inputs. No caso eu preenchi da forma.
+    
     ```JSON
         {
             "name": "Ash",
@@ -150,6 +153,7 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
         }
     ```
 - Com isso esse usuário é cadastrado na base de dados.
+
 <img src="assets/tabelaTrainer.png">
 
 - Voltando a pagina de login e preenchendo com estes dados.
@@ -170,6 +174,7 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
 <img src="assets/12.png">
 
 - __Página 4:__ Visualizar pokemons capturados: Aqui é feita uma busca no banco, que retorna todos os pokemons que o usuário com id=1 tem.
+
 <img src="assets/13.png">
 
     - Ainda nessa página é possível excluir um pokemon de um treinador e alterar o nome, só para este treinador.
