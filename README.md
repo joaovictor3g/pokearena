@@ -54,13 +54,11 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
     CREATE OR REPLACE FUNCTION add_modifications()
     RETURNS TRIGGER AS $$ 
     	BEGIN 
-    	  IF(TG_OP='INSERT') THEN
-    	    INSERT INTO changelog(description) 
-                VALUES('Treinador com id: ' || NEW.id_trainer 
-                || ' capturou pokemon com id: '|| NEW.id_pokemon);
-                RETURN NEW;
-    	 END IF;
-           END; 
+    	    INSERT INTO changelog(description)     
+            VALUES('Treinador com id: ' || NEW.id_trainer     
+            || ' capturou pokemon com id: '|| NEW.id_pokemon);    
+            RETURN NEW;
+        END; 
     $$ LANGUAGE plpgsql;
 
 
@@ -70,7 +68,7 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
     	EXECUTE PROCEDURE add_modifications();
     ```
 
-- Após a criação desta trigger rodar `yarn knex:seed` ou `npm run knex:seed`, para que os registros na tabela chanfelog sejam feitos e um treinador e pokemon sejam criados.
+- Após a criação desta trigger rodar `yarn knex:seed` ou `npm run knex:seed`, para que os registros na tabela changelog sejam feitos e um treinador e pokemon sejam criados.
 
 
 - Após isto no mesmo diretório rode `yarn dev` ou `npm run dev`, para executar o backend da aplicação em modo de desenvolvimento. Com isso sua aplicação estará rodando no seguinte endereço: `http://localhost:3333`. Caso seja necessário testar as rotas do backend pode ser usado um software chamado Imsomnia.
@@ -177,7 +175,18 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
 
 <img src="assets/13.png">
 
-    - Ainda nessa página é possível excluir um pokemon de um treinador e alterar o nome, só para este treinador.
+- Ainda nessa página é possível excluir um pokemon de um treinador e alterar o nome, só para este treinador.
+
+    <img src="assets/17.png">
+    
+    - Ao apagar:
+
+    <img src="assets/apagado.png">
+
+    - Resultado no banco:
+
+    <img src="assets/22.png">
+
 
 
 - __Página 5:__ Alterar avatar do treinador: é possível alterar a imagem do treinador, por upload de imagens:
