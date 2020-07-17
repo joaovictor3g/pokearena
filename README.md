@@ -192,7 +192,7 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
 
 <img src="assets/14.png">
 
-    - Modal de visualização dos pokemons dos treinadores online, clicando no i azul:
+- Modal de visualização dos pokemons dos treinadores online, clicando no i azul:
 
     <img src="assets/15.png">
         
