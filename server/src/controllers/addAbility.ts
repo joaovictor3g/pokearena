@@ -1,7 +1,9 @@
 import { Request, Response } from 'express';
 import connection from '../database/connection';
 import api from '../services/api';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+
+interface DATA  { name: string, id_ability: number, effect: string }
 
 const addAbility = {
     async index(req: Request, res: Response) {
@@ -29,24 +31,104 @@ const addAbility = {
 
         const trx = await connection.transaction();
 
-        const isAlreadyExists = await trx('ability').select('name');
+        let data: {
+            id_pokemon: number,
+            id_ability: number
+        }[] = [];
 
-        const result = isAlreadyExists.map((ability: { name: string }) => ability.name);
+        const functionWithPromise = async (name: string, url: string) => { //a function that returns a promise
+            return await axios.get(url).then(res => {
+                data.push({ id_pokemon: Number(id_pokemon), id_ability: Number(res.data.id) })
+                
+                return {
+                    id_ability: res.data.id,
+                    name,
+                    effect: res.data.effect_entries[1].effect
+                }
+            })
+        }
 
-        getAbilities.map(async(ability: { name: string, url: string }, idx: number) => {
-            const res = await axios.get(ability.url);
+        const anAsyncFunction = async (name: string, url: string) => {
+          return functionWithPromise(name, url)
+        }
+        
+        const getData = async (): Promise<any[]> => {
+          return Promise.all(getAbilities.map((ability: { name: string, url: string }) => anAsyncFunction(ability.name, ability.url)))
+        }
 
-            if(!result.includes(ability.name)) {
-                await trx('ability').insert({ name: ability.name, effect: res.data.effect_entries[1].effect, id_ability: res.data.id });
+        let dataParams: DATA[] = [];
 
+        dataParams = await getData()
+
+        // console.log(dataParams);
+
+        const names = (await getData()).map((ability: { name: string }) => ability.name);
+        
+        const ids = (await getData()).map((ability: { id_ability: number }) => ability.id_ability);
+
+        // console.log(data)
+
+        names.map(async (name: string, idx: number) => {
+            const isAlreadyExists = await trx('ability').select('name');
+                
+            const result = isAlreadyExists.map((ability: { name: string }) => ability.name);
+
+            if(!result.includes(name)) {
+                await trx('ability').insert(dataParams[idx]);
+        
             }
-            await trx('pokemon_abilities').insert({ id_pokemon, id_ability: res.data.id }); 
-            
-            await trx.commit();
-           
         })
 
-        return res.json({ message: 'deu certo' })
+        try {
+            const abilityAdded = await trx('ability').select('id_ability');
+
+            // console.log(abilityAdded)
+
+            if(abilityAdded) {
+
+                console.log('entrou no primeiro IF')
+                const resultAbilityAdded = abilityAdded.map((ability: { id_ability: number }) => ability.id_ability);
+
+                console.log(data, ids);
+
+                let newData: {
+                    id_pokemon: number,
+                    id_ability: number
+                }[] = [];
+
+                for(var i = data.length-1; i >= 0; i--) {
+                    newData.push(data[i]); 
+                }   
+
+                // console.log('new data', newData)
+
+                ids.map(async(id: number, idx: number) => {
+                    if(resultAbilityAdded.includes(id)) {
+                        // console.log('Entrou no map e IF')
+                        console.log(id)
+                        console.log(newData[idx])
+                        
+                        try {
+                
+                            await trx('pokemon_abilities').insert(newData[idx]);
+                            
+        
+                            console.log('Entrou non try catch')
+                        }catch(err) {
+                            console.log('erro')
+                        }
+                    
+                    }   
+                })
+            }
+        } catch(err) {
+            console.log('erro 1')
+        }
+    
+        await trx.commit();
+
+        return res.json({ message: 'deu certo' });
+        
     },  
 };
 

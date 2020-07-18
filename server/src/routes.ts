@@ -32,7 +32,7 @@ routes.post('/catch/:id', addPokemonToTrainer.create);
 routes.get('/see-pokemons-caught/:id', addPokemonToTrainer.show);
 routes.put('/update-pokemon', addPokemonToTrainer.updateName);
 
-routes.get('/see-infos/:id_pokemon', addAbility.create);
+routes.get('/add-ability/:id_pokemon', addAbility.create);
 routes.get('/see-pokemon-infos/:id_pokemon', addAbility.index);
 
 routes.get('/add-types/:id_pokemon', typeController.create);
