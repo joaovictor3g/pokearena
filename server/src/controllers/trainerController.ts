@@ -65,7 +65,8 @@ const trainerController = {
         const abilityPokemon = await connection('pokemon')
             .join('pokemon_abilities', 'pokemon_abilities.id_pokemon', 'pokemon.id_pokemon')
             .whereIn('pokemon.id_pokemon', result)
-            .select('pokemon_abilities.id_ability');
+            .select('pokemon_abilities.id_ability')
+            
 
         const serializedPokemons = abilityPokemon.map((id: { id_ability: number }) => id.id_ability );
 
@@ -75,7 +76,20 @@ const trainerController = {
             .select('*')
             .distinct();
 
-        return res.json({ infoPokemon, abilities });
+        const typePokemon = await connection('pokemon')
+            .join('pokemon_type', 'pokemon_type.id_pokemon', 'pokemon.id_pokemon')
+            .whereIn('pokemon.id_pokemon', result)
+            .select('pokemon_type.id_type');
+
+        const serializedTypes = typePokemon.map((type: { id_type: number }) => type.id_type);
+
+        const types = await connection('typing')
+            .join('pokemon_type', 'pokemon_type.id_type', 'typing.id_type')
+            .whereIn('typing.id_type', serializedTypes)
+            .select('*')
+            .distinct();
+
+        return res.json({ infoPokemon, abilities, types });
     },
 
     // Deleta um pokemon do treinador

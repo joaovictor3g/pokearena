@@ -70,7 +70,7 @@ const addAbility = {
 
         dataParams = await getData()
 
-        console.log(data);
+        // console.log(data);
 
         const names = dataParams.map((ability: { name: string }) => ability.name);
         
@@ -89,11 +89,7 @@ const addAbility = {
             }
         })
 
-        // const abilityAdded = await trx('ability').select('id_ability');
-
         const abilityAdded = await getResponse();
-
-        //console.log(abilityAdded);
 
         try {
             const resultAbilityAdded = abilityAdded.map((ability: { id_ability: number }) => ability.id_ability);
@@ -104,9 +100,6 @@ const addAbility = {
             for(var i = data.length-1; i >= 0; i--) {
                 newData.push(data[i]); 
             }   
-            const pokemonAbilityAdded = await verifyIfExists();
-
-            console.log(pokemonAbilityAdded)
 
             ids.map(async(id: number, idx: number) => {
                 if(!abilityAdded || resultAbilityAdded.includes(id)) {
