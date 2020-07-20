@@ -12,6 +12,14 @@ interface Props {
     onClose?: () => void
 }
 
+interface PokemonProp {
+    name: string, 
+    nickname?: string,
+    id_pokemon: number, 
+    image: string, 
+    description: string
+}
+
 interface ImageProp {
     image: string
 }
@@ -30,7 +38,7 @@ const TrainerInfo: React.FC<Props> = ({ name, id_trainer, is_online, onClose }) 
     async function getInfos() {
         const response = await api.get(`/see-your-pokemons/${id_trainer}`);
 
-        setPokemons(response.data);
+        setPokemons(response.data.infoPokemon);
     }
 
     useEffect(() => {
@@ -50,8 +58,8 @@ const TrainerInfo: React.FC<Props> = ({ name, id_trainer, is_online, onClose }) 
             <div className="pokemons-content">
                 <h2 className="title">Pokemons de {name}</h2>
                 {pokemons? 
-                    pokemons.map((pokemon: ImageProp) => (
-                        <img src={pokemon.image} alt="pokemon" className="listed-pokemons"/>
+                    pokemons.map((pokemon: PokemonProp, idx: number) => (
+                        <img key={idx} src={pokemon.image} alt="pokemon" className="listed-pokemons"/>
                     )) : 
                     <span>{name} não capturou nenhum pokemon</span>}
             </div>

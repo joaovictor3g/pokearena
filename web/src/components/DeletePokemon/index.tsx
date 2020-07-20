@@ -1,8 +1,8 @@
-import React, { MouseEvent, useState } from 'react';
+import React, { MouseEvent } from 'react';
 import api from '../../services/api';
 import {MdCancel } from 'react-icons/md';
 
-import Alert from '../Alert';
+// import Alert from '../Alert';
 
 import './styles.css';
 

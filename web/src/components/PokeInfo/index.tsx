@@ -7,16 +7,13 @@ import api from '../../services/api';
 interface Props {
     pokedexNumber: number,
     name: string,
-    setDescription: Dispatch<SetStateAction<string>>,
+    setDescription?: Dispatch<SetStateAction<string>>,
     onClose: () => void
 }
 
-const PokeInfo: React.FC<Props> = ({ pokedexNumber, name, setDescription, onClose }) => {
-    const [infos, setInfos] = useState<[]>([]);
+const PokeInfo: React.FC<Props> = ({ pokedexNumber, name, onClose }) => {
     const [types, setTypes] = useState<[]>([]);
-    const [numberType, setNumberType] = useState<[]>([]);
-    const [urlType, setUrlType] = useState<string[]>([]);
-
+    
     const [uniqueDescription, setUniqueDescription] = useState<string>('');
 
     useEffect(() => {
@@ -25,7 +22,7 @@ const PokeInfo: React.FC<Props> = ({ pokedexNumber, name, setDescription, onClos
                 setTypes(res.data.types);
                 // setUrlType(types.map((type: { type: { url: string } }) => type.type.url))
             });
-    }, [pokedexNumber, types, urlType]);
+    }, [pokedexNumber, types]);
 
     async function getDetail () {
         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${pokedexNumber}`)
@@ -39,7 +36,7 @@ const PokeInfo: React.FC<Props> = ({ pokedexNumber, name, setDescription, onClos
         for (var i = 0; i < obj.length; i++) {
           if (response.data.flavor_text_entries[i].language.name === 'en' && response.data.flavor_text_entries[i].version.name === obj[i]) {
             setUniqueDescription(response.data.flavor_text_entries[i].flavor_text)
-            setDescription(response.data.flavor_text_entries[i].flavor_text)
+            
             break
           }
         }
@@ -59,7 +56,8 @@ const PokeInfo: React.FC<Props> = ({ pokedexNumber, name, setDescription, onClos
 
         const pokeData = { 
             id_pokemon: pokedexNumber, 
-            name, description: uniqueDescription, 
+            name, 
+            description: uniqueDescription, 
             image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokedexNumber}.png` 
         };
 
@@ -68,34 +66,37 @@ const PokeInfo: React.FC<Props> = ({ pokedexNumber, name, setDescription, onClos
 
             const pokemonAdded = await api.post(`catch/${id}`, data);
 
-            await api.get(`/add-ability/${pokedexNumber}`);
+            const pokedex1 = await api.get(`/add-ability/${pokedexNumber}`);
             
-            await api.get(`/add-ability/${pokedexNumber}`);
+            const pokedex2 = await api.get(`/add-ability/${pokedexNumber}`);
 
-            await api.get(`/add-types/${pokedexNumber}`);
+            const type1 = await api.get(`/add-types/${pokedexNumber}`);
             
-            await api.get(`/add-types/${pokedexNumber}`);
+            const type2 = await api.get(`/add-types/${pokedexNumber}`);
 
+            if(pokemonAdded && pokedex1 && pokedex2 && type1 && type2) {
+                alert('Capturado');
+                onClose();
 
-            if(!pokemonAdded) {
+            }else {
                 alert('Não Capturado');
                 return;
             }
 
-            alert('Capturado');
-            onClose();
-
         } catch(err) {
 
-        }
+        }    
+    }
 
-        
+    // Primeira letra maiuscula
+    function capitalizeFirstLetter (string: string) {
+        return string.charAt(0).toUpperCase() + string.slice(1)
     }
 
     return (
         <div className="container-modal">
             <div className="name-and-cancel-container">
-                <h1>{name}</h1>
+                <h1>{capitalizeFirstLetter(name)}</h1>
                 <button onClick={onClose}> 
                     <MdCancel color="#000" size={30}/>
                 </button> 
@@ -104,10 +105,10 @@ const PokeInfo: React.FC<Props> = ({ pokedexNumber, name, setDescription, onClos
             <div className="description-image-container">
                 <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokedexNumber}.png`} alt="pokemon"/>
                 
-                <span>{uniqueDescription}</span>
+                <span>{uniqueDescription? uniqueDescription: <p>Carregando....</p> }</span>
             </div>
             {types.map((type: { type: { name: string } }, idx: number) => (
-                <p className={type.type.name} key={idx}>{type.type.name}</p>
+                <p className={type.type.name} key={idx}>{capitalizeFirstLetter(type.type.name)}</p>
             ))}
             <button onClick={persistInfos} className="confim-catching">Confirmar Captura?</button>
         </div>

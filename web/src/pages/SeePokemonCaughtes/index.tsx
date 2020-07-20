@@ -43,10 +43,7 @@ const SeePokemonCaughtes: React.FC = () => {
     const [namePokemon, setNamePokemon] = useState<string>('');
 
     const [isUpdate, setUpdate] = useState<boolean>(false);
-
-    const [isSubmited, setSubmited] = useState<boolean>(false);
     
-
     async function getInfos() {
         const response = await api.get(`/see-your-pokemons/${id}`);
 
@@ -68,13 +65,18 @@ const SeePokemonCaughtes: React.FC = () => {
 
         setIdPokemon(id_pokemon);
         setNamePokemon(name);
-        setSubmited(true);
     }
 
     function handleUpdatePokemon(idPokemon: number, name: string) {
         setUpdate(true);
         setIdPokemon(idPokemon);
         setNamePokemon(name);
+    }
+
+    // Primeira letra maiuscula
+    function capitalizeFirstLetter (string: string | undefined) {
+        if(string)
+            return string.charAt(0).toUpperCase() + string.slice(1)
     }
 
     return (
@@ -85,7 +87,7 @@ const SeePokemonCaughtes: React.FC = () => {
                     <div key={idx} className="content-pokemons">
                         <div className="trash-and-id">                                                                                                                                      
                             <p className="id">{pokemon.id_pokemon}</p>
-                            <p className="name">{pokemon.nickname  || pokemon.name}</p>
+                            <p className="name">{capitalizeFirstLetter(pokemon.nickname)  || capitalizeFirstLetter(pokemon.name)}</p>
                             <div className="edit-pokemon">
                                 <button className="btn" onClick={() => handleDeletePokemon(pokemon.id_pokemon, (pokemon.nickname || pokemon.name))}>
                                     <FiTrash2 size={22} color="#8c8c8c"/>
@@ -101,13 +103,13 @@ const SeePokemonCaughtes: React.FC = () => {
                             <div className="abilities-and-types">
                                 {types.map((type: TypeProps) => (
                                     pokemon.id_pokemon===type.id_pokemon ?
-                                        <p className={type.name} key={type.id_type}>{type.name}</p>: null
+                                        <p className={type.name} key={type.id_type}>{capitalizeFirstLetter(type.name)}</p>: null
                                 ))}
                                 <div className="abilities-container">
                                     {abilties.map((ability: AbilityProps) => (
                                         (pokemon.id_pokemon===ability.id_pokemon)?(
                                             <div key={ability.id_ability}>
-                                            <span >{ability.name}</span>
+                                            <span >{capitalizeFirstLetter(ability.name)}</span>
                                             <button className="ability-content">
                                                 <FaQuestion color="#FFF" size={14}/>
                                             </button>

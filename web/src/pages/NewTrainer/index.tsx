@@ -1,7 +1,7 @@
 import React, { useState, MouseEvent } from 'react';
 import api from '../../services/api';
 
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './styles.css';
 
 import { FiPower } from 'react-icons/fi';

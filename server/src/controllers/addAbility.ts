@@ -82,10 +82,13 @@ const addAbility = {
             const isAlreadyExists = await trx('ability').select('name');
                 
             const result = isAlreadyExists.map((ability: { name: string }) => ability.name);
-
+            
             if(!result.includes(name)) {
-                await trx('ability').insert(dataParams[idx]);
-        
+                try {
+                    await trx('ability').insert(dataParams[idx]);
+                } catch(err) {
+
+                }
             }
         })
 
@@ -108,7 +111,7 @@ const addAbility = {
                         
                     
                     }catch(err) {
-                        console.log('erro')
+                        console.log('Só uma habilidade adicionada');
                     }
                 }
             

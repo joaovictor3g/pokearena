@@ -23,7 +23,6 @@ const Logged = () => {
 
     const [isPokeInfoVisbile, setPokeInfoVisible] = useState<boolean>(false);
     const [pokedexNumber, setPokedexNumber] = useState<number>(1);
-    const [description, setDescription] = useState<string>('');
     const [pokemonName, setPokemonName] = useState<string>('');
 
     const [image_profile, setImage] = useState<ImageProp>();
@@ -158,7 +157,7 @@ const Logged = () => {
                                   <PokeInfo 
                                     pokedexNumber={pokedexNumber}
                                     name={pokemonName}
-                                    setDescription={setDescription}
+                                    // setDescription={setDescription}
                                     onClose={()=>setPokeInfoVisible(false)}
                                   /> : null}
                               </td>

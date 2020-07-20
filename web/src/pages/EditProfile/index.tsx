@@ -10,9 +10,7 @@ import './styles.css';
 const EditProfile: React.FC = () => {
     const [selectedFile, setSelectedFile] = useState<File>();
     const [selectedFileUrl, setSelectedFileUrl] = useState('');
-    const [name, setName] = useState<string>('');
-    const [password, setPass] = useState<string>('');
-
+  
     const history = useHistory();
 
     async function handleSubmit(e: MouseEvent<HTMLButtonElement>) {
@@ -23,7 +21,6 @@ const EditProfile: React.FC = () => {
 
       if(selectedFile)
         data.append('image', selectedFile);
-      data.append('password', password);
       
       try {
         const response = await api.post(`/edit-profile/${id_trainer}`, data);
