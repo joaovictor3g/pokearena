@@ -72,7 +72,8 @@ const trainerController = {
         const abilities = await connection('ability')
             .join('pokemon_abilities', 'pokemon_abilities.id_ability', 'ability.id_ability')
             .whereIn('ability.id_ability', serializedPokemons)
-            .select('*');
+            .select('*')
+            .distinct();
 
         return res.json({ infoPokemon, abilities });
     },

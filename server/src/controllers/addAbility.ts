@@ -10,6 +10,10 @@ async function getResponse(): Promise<any[]> {
 }
 
 
+async function verifyIfExists(): Promise<any[]> {
+    return await connection('pokemon_abilities').select('*').distinct();
+}
+
 const addAbility = {
     async index(req: Request, res: Response) {
         const { id_pokemon } = req.params;
@@ -66,11 +70,13 @@ const addAbility = {
 
         dataParams = await getData()
 
-        // console.log(dataParams);
+        console.log(data);
 
         const names = dataParams.map((ability: { name: string }) => ability.name);
         
         const ids = dataParams.map((ability: { id_ability: number }) => ability.id_ability);
+
+        const idsPokemon = data.map((data: { id_pokemon: number }) => data.id_pokemon)
 
         names.map(async (name: string, idx: number) => {
             const isAlreadyExists = await trx('ability').select('name');
@@ -98,11 +104,12 @@ const addAbility = {
             for(var i = data.length-1; i >= 0; i--) {
                 newData.push(data[i]); 
             }   
+            const pokemonAbilityAdded = await verifyIfExists();
+
+            console.log(pokemonAbilityAdded)
+
             ids.map(async(id: number, idx: number) => {
-               
                 if(!abilityAdded || resultAbilityAdded.includes(id)) {
-                    // console.log('Entrou no map e IF')
-                   
                     try {
                         await connection('pokemon_abilities').insert(newData[idx]);
                         
@@ -113,7 +120,6 @@ const addAbility = {
                 }
             
             })
-            // }
         } catch(err) {
             console.log('erro 1')
         }
