@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
 import { FiTrash2 } from 'react-icons/fi';
-import { FaEdit } from 'react-icons/fa';
+import { FaEdit, FaQuestion } from 'react-icons/fa';
 
 import Header from '../../components/Header';
 import DeletePokemon from '../../components/DeletePokemon';
@@ -25,9 +25,16 @@ interface AbilityProps {
     id_ability: number;
 }
 
+interface TypeProps {
+    name: string;
+    id_type: number;
+    id_pokemon: number;
+}
+
 const SeePokemonCaughtes: React.FC = () => {
     const [pokemons, setPokemons] = useState<[]>([]);
     const [abilties, setAbilities] = useState<[]>([]);
+    const [types, setTypes] = useState<[]>([]);
 
     const id = Number(sessionStorage.getItem('id_trainer'));
     const [isdeleted, setDelete] = useState<boolean>(false);
@@ -47,7 +54,7 @@ const SeePokemonCaughtes: React.FC = () => {
 
         setPokemons(response.data.infoPokemon);
         setAbilities(response.data.abilities)
-        // console.log(abilties)
+        setTypes(response.data.types)
     }
 
     useEffect(() => {
@@ -86,16 +93,35 @@ const SeePokemonCaughtes: React.FC = () => {
                                 <button className="btn" onClick={() => handleUpdatePokemon(pokemon.id_pokemon, (pokemon.nickname || pokemon.name))}>
                                     <FaEdit size={22} color="#8c8c8c" />
                                 </button>
+                                
                             </div>
                         </div>
-            
-                        <img src={pokemon.image} alt="pokemon" />
-                        <span className="description">{pokemon.description}</span>
-                        {abilties.map((ability: AbilityProps) => (
-                            (pokemon.id_pokemon===ability.id_pokemon)? 
-                                <p key={ability.id_ability}>{ability.name}</p>: null
+                        <div className="image-and-abilities">
+                            <img src={pokemon.image} alt="pokemon" />
+                            <div className="abilities-and-types">
+                                {types.map((type: TypeProps) => (
+                                    pokemon.id_pokemon===type.id_pokemon ?
+                                        <p className={type.name} key={type.id_type}>{type.name}</p>: null
+                                ))}
+                                <div className="abilities-container">
+                                    {abilties.map((ability: AbilityProps) => (
+                                        (pokemon.id_pokemon===ability.id_pokemon)?(
+                                            <div key={ability.id_ability}>
+                                            <span >{ability.name}</span>
+                                            <button className="ability-content">
+                                                <FaQuestion color="#FFF" size={14}/>
+                                            </button>
+                                            </div>
+                                            ): null
+                                        
+                                    ))}
+                                </div>
+                            </div>
+                        </div>        
+
                             
-                        ))}
+                        <span className="description">{pokemon.description}</span>
+                        
                         {isdeleted ?                                                        
                             <DeletePokemon 
                                 name={namePokemon} 

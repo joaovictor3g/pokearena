@@ -72,6 +72,10 @@ const PokeInfo: React.FC<Props> = ({ pokedexNumber, name, setDescription, onClos
             
             await api.get(`/add-ability/${pokedexNumber}`);
 
+            await api.get(`/add-types/${pokedexNumber}`);
+            
+            await api.get(`/add-types/${pokedexNumber}`);
+
 
             if(!pokemonAdded) {
                 alert('Não Capturado');

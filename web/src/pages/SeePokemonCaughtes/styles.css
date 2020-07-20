@@ -16,8 +16,8 @@
 .your-pokemons-content .content-pokemons {
     border-radius: 8px;
     padding: 20px;
-    text-align: center;
-
+    width: 50%;
+    min-width: 511px;
     margin-left: 10px;
 
     background: #FFF;
@@ -31,11 +31,16 @@
 .your-pokemons-content .content-pokemons .id {
     font-size: 20px;
     font-weight: bold;
+
+    color: #000;
 }
 
 .your-pokemons-content .content-pokemons img {
     width: 200px;
     height: 200px;
+
+    background: #DDD;
+    border-radius: 50%;
 }
 
 .your-pokemons-content .content-pokemons .name {
@@ -43,6 +48,7 @@
     font-size: 24px;
 
     font-family: Ubuntu;
+    color: #000;
 }
 
 .your-pokemons-content .content-pokemons .description {
@@ -57,4 +63,157 @@
 .trash-and-id {
     display: flex;
     justify-content: space-between;
+}
+
+.ability-content {
+    background: #000;
+  
+  text-align:center;  border: 0;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    border-radius: 50%;
+    padding: 7px;
+}
+
+.content-pokemons p {
+    height: 30px;
+
+
+    color: #FFF;
+    align-items: center;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+
+    border-radius: 5px;
+    
+}
+
+.image-and-abilities {
+    display: flex;
+    justify-content: space-between;
+   }
+
+.abilities-container {
+    width: 100%;
+    background: crimson;
+    margin-bottom: 5px;
+    border-radius: 5px;
+
+    color: #FFF;
+    font-weight: bold;
+    font-family: Ubuntu;
+    font-size: 20px;
+    padding: 20px;
+}
+
+.abilities-and-types {
+    width: 50%;
+}
+
+p.fire {
+    background: #ff8000;
+    text-align:center;
+    
+}
+
+p.poison {
+    background: #730099;
+    text-align:center;
+    
+}
+
+p.grass {
+    background: #00e600;
+    text-align:center;
+    
+}
+
+p.psychic {
+    background: #d24dff;
+    text-align:center;
+    
+}
+
+p.ice {
+    background: #80e5ff;
+    text-align:center;
+    
+}
+
+p.flying {
+    background: #1affff;
+    text-align:center;
+    
+}
+
+p.normal {
+    background:#a3a375;
+    
+}
+
+p.water {
+    background:#0099ff;
+    text-align: center;
+}
+
+
+p.dark {
+    background:#003366;
+    text-align: center;
+}
+
+p.rock {
+    background: #b37700;
+    text-align:center;
+    
+}
+
+p.bug {
+    background: #333300;
+    text-align:center;
+    
+}
+
+p.electric {
+    background: #ffff33;
+    text-align:center;
+    
+}
+
+p.fairy {
+    background: #ff4d88;
+    text-align:center;
+}
+
+p.fighting {
+    background: #ff3300;
+    text-align:center;
+    
+}
+
+p.dragon {
+    background: #008fb3;
+    text-align:center;
+    
+}
+
+p.ghost {
+    background: #000080;
+    text-align:center;
+    
+}
+
+p.ground {
+    background: #4d2600;
+    text-align:center;
+    
+}
+
+p.steel {
+    background: #33ff99;
+    text-align:center;
+    
 }
