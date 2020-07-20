@@ -13,7 +13,7 @@ interface Props {
 
 const PokeInfo: React.FC<Props> = ({ pokedexNumber, name, onClose }) => {
     const [types, setTypes] = useState<[]>([]);
-    
+    const [textButton, setTextButton] = useState<string>('Confirmar Captura?');
     const [uniqueDescription, setUniqueDescription] = useState<string>('');
 
     useEffect(() => {
@@ -62,6 +62,8 @@ const PokeInfo: React.FC<Props> = ({ pokedexNumber, name, onClose }) => {
         };
 
         try { 
+            setTextButton('Carregando....')
+
             await api.post(`/catch-pokemons`, pokeData);
 
             const pokemonAdded = await api.post(`catch/${id}`, data);
@@ -110,7 +112,7 @@ const PokeInfo: React.FC<Props> = ({ pokedexNumber, name, onClose }) => {
             {types.map((type: { type: { name: string } }, idx: number) => (
                 <p className={type.type.name} key={idx}>{capitalizeFirstLetter(type.type.name)}</p>
             ))}
-            <button onClick={persistInfos} className="confim-catching">Confirmar Captura?</button>
+            <button onClick={persistInfos} className="confim-catching">{textButton}</button>
         </div>
     );
 }
