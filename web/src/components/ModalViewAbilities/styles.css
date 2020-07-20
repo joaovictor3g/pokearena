@@ -1,0 +1,48 @@
+.modal-view-abilities {
+    text-align: center;
+    width: 800px;
+    height: max-content;
+    font-weight: normal;
+    margin-top: 100px;
+ 
+    padding: 20px;
+
+
+    content: '';
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background: rgba(#000, .5);
+    z-index: 2;
+    align-items: center;
+
+    border: 1px solid #000;
+
+    background: #FFF;
+
+    margin: auto;
+    text-align: justify;
+}
+
+.modal-view-abilities .name-and-cancel {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.modal-view-abilities .name-and-cancel .name-pokemon {
+    font-size: 25px;
+    font-weight: bold;
+    font-family: Ubuntu;
+    color: crimson;
+}
+
+.modal-view-abilities .name-and-cancel .button-exit {
+    background: transparent;
+    border: 0;
+}
+
+.modal-view-abilities .effect {
+    font-size: 30px;
+    font-family: Ubuntu;
+    
+}

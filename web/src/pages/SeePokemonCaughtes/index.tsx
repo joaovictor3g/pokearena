@@ -6,6 +6,7 @@ import { FaEdit, FaQuestion } from 'react-icons/fa';
 import Header from '../../components/Header';
 import DeletePokemon from '../../components/DeletePokemon';
 import ModalUpdatePokemon from '../../components/ModalUpdatePokemon';
+import ModalViewAbilities from '../../components/ModalViewAbilities';
 // import Alert from '../../components/Alert';
 
 import './styles.css';
@@ -43,6 +44,10 @@ const SeePokemonCaughtes: React.FC = () => {
     const [namePokemon, setNamePokemon] = useState<string>('');
 
     const [isUpdate, setUpdate] = useState<boolean>(false);
+
+    const [isAbilitiesVisible, setAbilitiesVisible] = useState<boolean>(false);
+    const [nameAbility, setNameAbility] = useState<string>('');
+    const [effectAbility, setEffectAbility] = useState<string>('');
     
     async function getInfos() {
         const response = await api.get(`/see-your-pokemons/${id}`);
@@ -76,7 +81,15 @@ const SeePokemonCaughtes: React.FC = () => {
     // Primeira letra maiuscula
     function capitalizeFirstLetter (string: string | undefined) {
         if(string)
-            return string.charAt(0).toUpperCase() + string.slice(1)
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        
+    }
+
+    function handleOpenAbilities(name: string, effect: string, pokemonName: string) {
+        setNameAbility(name);
+        setEffectAbility(effect);
+        setNamePokemon(pokemonName)
+        setAbilitiesVisible(true)
     }
 
     return (
@@ -110,7 +123,7 @@ const SeePokemonCaughtes: React.FC = () => {
                                         (pokemon.id_pokemon===ability.id_pokemon)?(
                                             <div key={ability.id_ability}>
                                             <span >{capitalizeFirstLetter(ability.name)}</span>
-                                            <button className="ability-content">
+                                            <button className="ability-content" onClick={()=>handleOpenAbilities(ability.name, ability.effect, pokemon.name)}>
                                                 <FaQuestion color="#FFF" size={14}/>
                                             </button>
                                             </div>
@@ -140,7 +153,16 @@ const SeePokemonCaughtes: React.FC = () => {
                                 onClose={() => setUpdate(false)}
                                 id_trainer={id}
                             /> : 
-                        null}   
+                        null}  
+
+                        {isAbilitiesVisible?
+                            <ModalViewAbilities 
+                                name={nameAbility}
+                                effect={effectAbility}
+                                onClose={()=>setAbilitiesVisible(false)}
+                                pokemonName={namePokemon}
+                            />:
+                        null} 
 
                                                                                                                                                                                                                                                                             
                   </div>

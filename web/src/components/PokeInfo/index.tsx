@@ -76,7 +76,7 @@ const PokeInfo: React.FC<Props> = ({ pokedexNumber, name, onClose }) => {
             
             const type2 = await api.get(`/add-types/${pokedexNumber}`);
 
-            if(pokemonAdded && pokedex1 && pokedex2 && type1 && type2) {
+            if(pokemonAdded.data && pokedex1.data && pokedex2.data && type1.data && type2.data) {
                 alert('Capturado');
                 onClose();
 
