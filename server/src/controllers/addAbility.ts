@@ -5,6 +5,11 @@ import axios, { AxiosResponse } from 'axios';
 
 interface DATA  { name: string, id_ability: number, effect: string }
 
+async function getResponse(): Promise<any[]> {
+    return await connection('ability').select('id_ability');
+}
+
+
 const addAbility = {
     async index(req: Request, res: Response) {
         const { id_pokemon } = req.params;
@@ -48,6 +53,7 @@ const addAbility = {
             })
         }
 
+
         const anAsyncFunction = async (name: string, url: string) => {
           return functionWithPromise(name, url)
         }
@@ -62,11 +68,9 @@ const addAbility = {
 
         // console.log(dataParams);
 
-        const names = (await getData()).map((ability: { name: string }) => ability.name);
+        const names = dataParams.map((ability: { name: string }) => ability.name);
         
-        const ids = (await getData()).map((ability: { id_ability: number }) => ability.id_ability);
-
-        // console.log(data)
+        const ids = dataParams.map((ability: { id_ability: number }) => ability.id_ability);
 
         names.map(async (name: string, idx: number) => {
             const isAlreadyExists = await trx('ability').select('name');
@@ -79,48 +83,37 @@ const addAbility = {
             }
         })
 
+        // const abilityAdded = await trx('ability').select('id_ability');
+
+        const abilityAdded = await getResponse();
+
+        //console.log(abilityAdded);
+
         try {
-            const abilityAdded = await trx('ability').select('id_ability');
-
-            // console.log(abilityAdded)
-
-            if(abilityAdded) {
-
-                console.log('entrou no primeiro IF')
-                const resultAbilityAdded = abilityAdded.map((ability: { id_ability: number }) => ability.id_ability);
-
-                console.log(data, ids);
-
-                let newData: {
-                    id_pokemon: number,
-                    id_ability: number
-                }[] = [];
-
-                for(var i = data.length-1; i >= 0; i--) {
-                    newData.push(data[i]); 
-                }   
-
-                // console.log('new data', newData)
-
-                ids.map(async(id: number, idx: number) => {
-                    if(resultAbilityAdded.includes(id)) {
-                        // console.log('Entrou no map e IF')
-                        console.log(id)
-                        console.log(newData[idx])
+            const resultAbilityAdded = abilityAdded.map((ability: { id_ability: number }) => ability.id_ability);
+            let newData: {
+                id_pokemon: number,
+                id_ability: number
+            }[] = [];
+            for(var i = data.length-1; i >= 0; i--) {
+                newData.push(data[i]); 
+            }   
+            ids.map(async(id: number, idx: number) => {
+               
+                if(!abilityAdded || resultAbilityAdded.includes(id)) {
+                    // console.log('Entrou no map e IF')
+                   
+                    try {
+                        await connection('pokemon_abilities').insert(newData[idx]);
                         
-                        try {
-                
-                            await trx('pokemon_abilities').insert(newData[idx]);
-                            
-        
-                            console.log('Entrou non try catch')
-                        }catch(err) {
-                            console.log('erro')
-                        }
                     
-                    }   
-                })
-            }
+                    }catch(err) {
+                        console.log('erro')
+                    }
+                }
+            
+            })
+            // }
         } catch(err) {
             console.log('erro 1')
         }

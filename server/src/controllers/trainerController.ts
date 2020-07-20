@@ -61,9 +61,20 @@ const trainerController = {
             .select('nickname_pokemon.nickname', 'pokemon.*')
             .orderBy('id_pokemon')
             .distinct();
-          
-    
-        return res.json(infoPokemon);
+        
+        const abilityPokemon = await connection('pokemon')
+            .join('pokemon_abilities', 'pokemon_abilities.id_pokemon', 'pokemon.id_pokemon')
+            .whereIn('pokemon.id_pokemon', result)
+            .select('pokemon_abilities.id_ability');
+
+        const serializedPokemons = abilityPokemon.map((id: { id_ability: number }) => id.id_ability );
+
+        const abilities = await connection('ability')
+            .join('pokemon_abilities', 'pokemon_abilities.id_ability', 'ability.id_ability')
+            .whereIn('ability.id_ability', serializedPokemons)
+            .select('*');
+
+        return res.json({ infoPokemon, abilities });
     },
 
     // Deleta um pokemon do treinador

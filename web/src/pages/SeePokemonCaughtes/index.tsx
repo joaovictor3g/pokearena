@@ -15,11 +15,19 @@ interface Props {
     nickname?: string,
     id_pokemon: number, 
     image: string, 
-    description: string 
-};
+    description: string
+}
+
+interface AbilityProps {
+    name: string;
+    id_pokemon: number
+    effect: string;
+    id_ability: number;
+}
 
 const SeePokemonCaughtes: React.FC = () => {
     const [pokemons, setPokemons] = useState<[]>([]);
+    const [abilties, setAbilities] = useState<[]>([]);
 
     const id = Number(sessionStorage.getItem('id_trainer'));
     const [isdeleted, setDelete] = useState<boolean>(false);
@@ -35,7 +43,11 @@ const SeePokemonCaughtes: React.FC = () => {
     async function getInfos() {
         const response = await api.get(`/see-your-pokemons/${id}`);
 
-        setPokemons(response.data);
+        // console.log(response.data);
+
+        setPokemons(response.data.infoPokemon);
+        setAbilities(response.data.abilities)
+        // console.log(abilties)
     }
 
     useEffect(() => {
@@ -79,7 +91,11 @@ const SeePokemonCaughtes: React.FC = () => {
             
                         <img src={pokemon.image} alt="pokemon" />
                         <span className="description">{pokemon.description}</span>
-
+                        {abilties.map((ability: AbilityProps) => (
+                            (pokemon.id_pokemon===ability.id_pokemon)? 
+                                <p key={ability.id_ability}>{ability.name}</p>: null
+                            
+                        ))}
                         {isdeleted ?                                                        
                             <DeletePokemon 
                                 name={namePokemon} 

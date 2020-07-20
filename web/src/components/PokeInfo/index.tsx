@@ -23,7 +23,7 @@ const PokeInfo: React.FC<Props> = ({ pokedexNumber, name, setDescription, onClos
         axios.get(`https://pokeapi.co/api/v2/pokemon/${pokedexNumber}`)
             .then(res => {
                 setTypes(res.data.types);
-                setUrlType(types.map((type: { type: { url: string } }) => type.type.url))
+                // setUrlType(types.map((type: { type: { url: string } }) => type.type.url))
             });
     }, [pokedexNumber, types, urlType]);
 
@@ -68,7 +68,10 @@ const PokeInfo: React.FC<Props> = ({ pokedexNumber, name, setDescription, onClos
 
             const pokemonAdded = await api.post(`catch/${id}`, data);
 
-            //await api.post(`/see-infos/${pokedexNumber}`)
+            await api.get(`/add-ability/${pokedexNumber}`);
+            
+            await api.get(`/add-ability/${pokedexNumber}`);
+
 
             if(!pokemonAdded) {
                 alert('Não Capturado');
