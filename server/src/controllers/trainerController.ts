@@ -79,7 +79,8 @@ const trainerController = {
         const typePokemon = await connection('pokemon')
             .join('pokemon_type', 'pokemon_type.id_pokemon', 'pokemon.id_pokemon')
             .whereIn('pokemon.id_pokemon', result)
-            .select('pokemon_type.id_type');
+            .select('pokemon_type.id_type')
+            .orderBy('pokemon_type.id_type');
 
         const serializedTypes = typePokemon.map((type: { id_type: number }) => type.id_type);
 
@@ -87,7 +88,7 @@ const trainerController = {
             .join('pokemon_type', 'pokemon_type.id_type', 'typing.id_type')
             .whereIn('typing.id_type', serializedTypes)
             .select('*')
-            .distinct();
+            .distinct()
 
         return res.json({ infoPokemon, abilities, types });
     },
