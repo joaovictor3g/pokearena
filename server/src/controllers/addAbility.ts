@@ -1,17 +1,12 @@
 import { Request, Response } from 'express';
 import connection from '../database/connection';
 import api from '../services/api';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
 interface DATA  { name: string, id_ability: number, effect: string }
 
 async function getResponse(): Promise<any[]> {
     return await connection('ability').select('id_ability');
-}
-
-
-async function verifyIfExists(): Promise<any[]> {
-    return await connection('pokemon_abilities').select('*').distinct();
 }
 
 const addAbility = {
@@ -76,7 +71,7 @@ const addAbility = {
         
         const ids = dataParams.map((ability: { id_ability: number }) => ability.id_ability);
 
-        const idsPokemon = data.map((data: { id_pokemon: number }) => data.id_pokemon)
+        // const idsPokemon = data.map((data: { id_pokemon: number }) => data.id_pokemon)
 
         names.map(async (name: string, idx: number) => {
             const isAlreadyExists = await trx('ability').select('name');

@@ -51,6 +51,7 @@
     
     width: 500px;
     max-width: 500px;
+    align-items: center;
     border-radius: 10px;
 }
 

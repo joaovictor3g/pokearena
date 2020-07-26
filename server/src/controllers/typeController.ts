@@ -63,13 +63,16 @@ const typeController = {
         const idsPokemon = data.map((data: { id_pokemon: number }) => data.id_pokemon)
 
         names.map(async (name: string, idx: number) => {
-            const isAlreadyExists = await trx('typing').select('name');
+            try {
+                const isAlreadyExists = await trx('typing').select('name');
                 
-            const result = isAlreadyExists.map((type: { name: string }) => type.name);
+                const result = isAlreadyExists.map((type: { name: string }) => type.name);
 
-            if(!result.includes(name)) {
-                await trx('typing').insert(dataParams[idx]);
-        
+                if(!result.includes(name)) 
+                    await trx('typing').insert(dataParams[idx]);
+            
+            } catch(err) {
+
             }
         })
 
