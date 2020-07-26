@@ -187,6 +187,7 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
 
     <img src="assets/22.png">
 
+    - Ainda é possível colocar um apelido no pokemon, clicando em 📝.
 
 
 - __Página 5:__ Alterar avatar do treinador: é possível alterar a imagem do treinador, por upload de imagens:
