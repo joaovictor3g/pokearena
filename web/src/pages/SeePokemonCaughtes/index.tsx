@@ -32,10 +32,16 @@ interface TypeProps {
     id_pokemon: number;
 }
 
+interface TrainerProp {
+    name: string;
+    id_trainer: number;
+}
+
 const SeePokemonCaughtes: React.FC = () => {
     const [pokemons, setPokemons] = useState<[]>([]);
     const [abilties, setAbilities] = useState<[]>([]);
     const [types, setTypes] = useState<[]>([]);
+    const [trainer, setTrainer] = useState<[]>([]);
 
     const id = Number(sessionStorage.getItem('id_trainer'));
     const [isdeleted, setDelete] = useState<boolean>(false);
@@ -55,8 +61,10 @@ const SeePokemonCaughtes: React.FC = () => {
         // console.log(response.data);
 
         setPokemons(response.data.infoPokemon);
-        setAbilities(response.data.abilities)
-        setTypes(response.data.types)
+        setAbilities(response.data.abilities);
+        setTypes(response.data.types);
+        setTrainer(response.data.idTrainer);
+
     }
 
     useEffect(() => {
@@ -94,7 +102,7 @@ const SeePokemonCaughtes: React.FC = () => {
 
     return (
         <>      
-            <Header title="Veja os Pokemons que você capturou" id_trainer={id}/>
+            <Header title={`Veja os Pokemons que você capturou, ${trainer.map((train: TrainerProp) => train.name)}`} id_trainer={id}/>
             <div className="your-pokemons-content">
                 {pokemons.map((pokemon: Props, idx: number) => (
                     <div key={idx} className="content-pokemons">
