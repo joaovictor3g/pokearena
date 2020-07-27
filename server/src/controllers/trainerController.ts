@@ -51,6 +51,10 @@ const trainerController = {
             .join('pokemon_trainer', 'pokemon_trainer.id_trainer', '=', 'trainer.id_trainer')
             .where('trainer.id_trainer', '=', id)
             .select('pokemon_trainer.id_pokemon');
+        
+        const idTrainer = await connection('trainer')
+            .select('name', 'id_trainer')
+            .where('id_trainer', id);
 
         const result = idPokemon.map(id => id.id_pokemon);
 
@@ -90,7 +94,7 @@ const trainerController = {
             .select('*')
             .distinct()
 
-        return res.json({ infoPokemon, abilities, types });
+        return res.json({ infoPokemon, abilities, types, idTrainer });
     },
 
     // Deleta um pokemon do treinador
