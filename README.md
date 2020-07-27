@@ -209,4 +209,5 @@ Veja a modelagem [aqui](https://raw.githubusercontent.com/joaovictor3g/game-poke
     - Quando a flag `is_online` que é um atributo do treinador está `false` é identificado como offline, por isso a borda vermelha, se estivesse on-line estaria verde, como segue, assim que o usuario loga é feita um `update` e o atributo é setado para `true`: 
     <img src="assets/16.png">
 
-<img src="assets/pokemons.gif">
+### Licença
+MIT LICENSE. Veja a [Licença](LICENSE)
